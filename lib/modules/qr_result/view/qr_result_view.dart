@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tracking_system_app/modules/qr_scan/controller/qr_scan_controller.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class QRResultPage extends StatelessWidget {
   final QrScanController qrController = Get.put(QrScanController());
@@ -38,15 +39,15 @@ class QRResultPage extends StatelessWidget {
               ),
               body: Center(
                 child: Container(
-                  padding: const EdgeInsets.all(40),
+                  padding: EdgeInsets.all(AppSizeW.s40),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(AppSizeR.s20),
                     color: const Color(0xffD9FFE3),
-                    boxShadow: const [
+                    boxShadow: [
                       BoxShadow(
                         color: Colors.black26,
-                        spreadRadius: 2.0,
-                        blurRadius: 10.0,
+                        spreadRadius: AppSizeW.s2,
+                        blurRadius: AppSizeW.s10,
                       ),
                     ],
                   ),
@@ -54,35 +55,34 @@ class QRResultPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0),
+                        padding: EdgeInsets.only(bottom: AppSizeH.s20),
                         child: Text(
                           "Success",
                           style: TextStyle(
                             color: AppVar.primary,
-                            fontSize: 40,
+                            fontSize: AppSizeSp.s40,
                           ),
                         ),
                       ),
                       QrImageView(
                         data: qrController.code.value,
-                        size: 150,
+                        size: AppSizeW.s150,
                         version: QrVersions.auto,
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: AppSizeH.s10),
                       SizedBox(
-                        width: 220,
+                        width: AppSizeW.s226,
                         child: Text(
                           "${qrController.qrScanModel.value.customerName}, ${qrController.qrScanModel.value.bagId}",
-                          // qrController.code.value,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: AppVar.primary,
-                            fontSize: 20,
+                            fontSize: AppSizeSp.s20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: AppSizeH.s20),
                       Obx(() {
                         return AnimatedSwitcher(
                           duration: const Duration(
@@ -91,8 +91,8 @@ class QRResultPage extends StatelessWidget {
                               ? SizedBox(
                                   key: const ValueKey(
                                       'lottie'), 
-                                  width: 62,
-                                  height: 62,
+                                  width: AppSizeW.s60,
+                                  height: AppSizeH.s60,
                                   child: Lottie.asset(
                                     'assets/Lottie/Animation - 1726871315481.json',
                                     repeat: false,
@@ -101,7 +101,7 @@ class QRResultPage extends StatelessWidget {
                                 )
                               : GestureDetector(
                                   key: const ValueKey(
-                                      'copyButton'), // Key to distinguish widgets
+                                      'copyButton'),
                                   onTap: () async {
                                     await Clipboard.setData(ClipboardData(
                                         text:
@@ -117,21 +117,21 @@ class QRResultPage extends StatelessWidget {
                                     child: AnimatedContainer(
                                       duration:
                                           const Duration(milliseconds: 300),
-                                      margin: const EdgeInsets.only(bottom: 20),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5, horizontal: 20),
+                                      margin: EdgeInsets.only(bottom: AppSizeH.s20),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: AppSizeH.s5, horizontal: AppSizeW.s20),
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(AppSizeR.s10),
                                         color: Colors.transparent,
                                         border: Border.all(
                                           color: AppVar.primary,
-                                          width: 2,
+                                          width: AppSizeW.s2,
                                         ),
                                       ),
                                       child: Text(
                                         "Copy",
                                         style: TextStyle(
-                                          fontSize: 20,
+                                          fontSize: AppSizeSp.s20,
                                           color: AppVar.primary,
                                           fontWeight: FontWeight.bold,
                                         ),

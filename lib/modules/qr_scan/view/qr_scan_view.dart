@@ -8,6 +8,7 @@ import 'package:qr_scanner_overlay/qr_scanner_overlay.dart';
 import 'package:tracking_system_app/controller/life_cycle_controller.dart';
 import 'package:tracking_system_app/modules/qr_scan/controller/qr_scan_controller.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 import 'package:tracking_system_app/widgets/general/main_loading_widget.dart';
 import 'package:tracking_system_app/widgets/qr_scann/status_types_row_widget.dart';
 
@@ -63,18 +64,18 @@ class _QrScanViewState extends State<QrScanView> {
   Widget _buildScannerBody(bool isTablet) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(AppSizeW.s20),
       child: Column(
         children: [
            Expanded(
             child: Center(
               child: Text(
                 "Scan Qr Here",
-                style: TextStyle(color: Colors.black54, fontSize: 16),
+                style: TextStyle(color: Colors.black54, fontSize: AppSizeSp.s16),
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: AppSizeH.s20),
           Expanded(
             flex: 2,
             child: Stack(
@@ -147,7 +148,7 @@ class _QrScanViewState extends State<QrScanView> {
       actions: [
         Obx(() {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: EdgeInsets.symmetric(horizontal: AppSizeW.s10),
             child: IconButton(
               onPressed: qrController.toggleFlash,
               icon: Icon(
@@ -164,21 +165,21 @@ class _QrScanViewState extends State<QrScanView> {
   }
 
   Widget _noInternetWidget() {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image(
-            image: AssetImage("assets/images/no-internet.png"),
-            width: 150,
-            height: 150,
+           Image(
+            image:const AssetImage("assets/images/no-internet.png"),
+            width: AppSizeW.s150,
+            height: AppSizeH.s150,
           ),
-          SizedBox(height: 10),
+          SizedBox(height: AppSizeH.s10),
           Text(
             "Connect to Internet and try again",
             style: TextStyle(
               color: Colors.black54,
-              fontSize: 16,
+              fontSize: AppSizeSp.s16,
             ),
           )
         ],
@@ -207,12 +208,12 @@ Widget _buildErrorWidget(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(Icons.error_outline, color: Colors.red, size: 80),
-        const SizedBox(height: 10),
+        Icon(Icons.error_outline, color: Colors.red, size: AppSizeSp.s80),
+        SizedBox(height: AppSizeH.s10),
         Text(
           'An error occurred: ${error.errorDetails?.details ?? error.toString()}',
-          style: const TextStyle(
-              color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.red, fontSize: AppSizeSp.s18, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
       ],
@@ -224,9 +225,9 @@ Widget _buildScannerOverlay() {
   return QRScannerOverlay(
     overlayColor: Colors.black26,
     borderColor: const Color(0xff3AD189),
-    borderRadius: 22,
-    borderStrokeWidth: 5,
-    scanAreaWidth: 250,
-    scanAreaHeight: 250,
+    borderRadius: AppSizeR.s22,
+    borderStrokeWidth: AppSizeW.s5,
+    scanAreaWidth: AppSizeW.s250,
+    scanAreaHeight: AppSizeH.s250,
   );
 }

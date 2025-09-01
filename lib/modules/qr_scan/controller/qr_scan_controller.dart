@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -125,36 +127,34 @@ class QrScanController extends GetxController {
   Future<void> sendToServerSide(String qrCodeData) async {
     isLoading.value = true; // Show loading indicator
     try {
-      //-------------Worker-----------
-      if ($.role == "worker") {
+      //-------------store_employee-----------
+      if ($.role == "store_employee") {
         if (scanningKind.value == "check_in") {
-          gitQrScanUrl.value = "${code.value}&screen=checkin_worker";
+          gitQrScanUrl.value = "${code.value}&action=check_in_warehouse";
         } else if (scanningKind.value == "check_out") {
-          gitQrScanUrl.value = "${code.value}&screen=checkout_worker";
+          gitQrScanUrl.value = "${code.value}&action=check_out_warehouse";
         }
       }
       //-------------Driver-----------
       else if ($.role == "driver") {
         if (scanningKind.value == "check_in") {
-          gitQrScanUrl.value = "${code.value}&screen=checkin_driver";
+          gitQrScanUrl.value = "${code.value}&action=check_in_driver";
         } else if (scanningKind.value == "delivered") {
-          gitQrScanUrl.value = "${code.value}&screen=delivered";
+          gitQrScanUrl.value = "${code.value}&action=delivered";
         } else if (scanningKind.value == "check_out") {
-          gitQrScanUrl.value = "${code.value}&screen=checkout_driver";
+          gitQrScanUrl.value = "${code.value}&action=check_out_driver";
         }
       }
-//zak uncomment this lines
-      // final response = await $.getQrScan(
-      //   gitQrScanUrl.value,
-      // );
-      // if (response != null) {
-      //   isScanCompleted.value = false;
-      //   qrScanModel.value = QrScanDataModel.fromJson(response["data"]);
-      //   Get.toNamed(Routes.QR_RESULT);
-      // }
-      //zak delte this line
+      log("zak $gitQrScanUrl.value");
+      final response = await $.getQrScan(
+        gitQrScanUrl.value,
+      );
+      if (response != null) {
+        isScanCompleted.value = false;
+        qrScanModel.value = QrScanDataModel.fromJson(response["data"]);
         Get.toNamed(Routes.QR_RESULT);
-      //zak delte this line
+      }
+
 
       isLoading.value = false;
       // }

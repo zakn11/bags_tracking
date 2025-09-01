@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class DefaultFormFeild extends StatelessWidget {
   const DefaultFormFeild({
@@ -55,23 +56,23 @@ class DefaultFormFeild extends StatelessWidget {
               color: AppVar.primary,
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(AppSizeR.s8),
               borderSide: BorderSide(
                 color: AppVar.primary.withAlpha(80),
               ),
             ),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizeR.s8),
                 borderSide: BorderSide(
                   color: AppVar.primary,
                 )),
             errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizeR.s8),
                 borderSide: const BorderSide(
                   color: Colors.red,
                 )),
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(AppSizeR.s8),
                 borderSide: BorderSide(
                   color: AppVar.primary,
                 ))),

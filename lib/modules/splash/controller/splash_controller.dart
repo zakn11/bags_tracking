@@ -13,26 +13,24 @@ class SplashController extends GetxController
     super.onInit();
     animationController = AnimationController(
       vsync: this,
-      duration: const Duration(
-          milliseconds: 2000), 
+      duration: const Duration(milliseconds: 2000),
     );
 
     scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Curves.easeOutCubic, 
+        curve: Curves.easeOutCubic,
       ),
     );
 
     opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Curves.easeInOut, 
+        curve: Curves.easeInOut,
       ),
     );
 
     animationController.forward();
-
 
     animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {

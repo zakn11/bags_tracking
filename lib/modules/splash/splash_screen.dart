@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:tracking_system_app/modules/splash/controller/splash_controller.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -23,7 +24,7 @@ class SplashScreen extends StatelessWidget {
                   scale: controller.scaleAnimation.value, 
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(
-                      100,
+                      AppSizeR.s100,
                     ),
                     child: SizedBox(
                       width: 300,

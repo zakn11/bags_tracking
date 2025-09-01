@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tracking_system_app/modules/auth/controller/register_controller.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 import 'package:tracking_system_app/widgets/auth/regester_form_widget.dart';
 
 class RegesterScreenTapletLayout extends GetView<RegisterController> {
@@ -33,7 +34,6 @@ class RegesterScreenTapletLayout extends GetView<RegisterController> {
                       ),
                     ),
 
-                  // Waiting for admin approval (Lottie Animation)
                   Obx(() {
                     if (controller.isWaitAdminApproved.value) {
                       return Positioned(
@@ -49,50 +49,50 @@ class RegesterScreenTapletLayout extends GetView<RegisterController> {
                                     borderRadius: BorderRadius.circular(1000),
                                     color: AppVar.background,
                                     border: Border.all(
-                                        width: 3, color: AppVar.primary)),
-                                width: 150,
-                                height: 150,
+                                        width: AppSizeW.s3, color: AppVar.primary)),
+                                width: AppSizeW.s150,
+                                height: AppSizeH.s150,
                                 child: Image.asset(
                                   "assets/images/Logo1.png",
                                   fit: BoxFit.fill,
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            SizedBox(height: AppSizeH.s20),
                             Center(
                               child: LottieBuilder.asset(
                                 repeat: false,
                                 "assets/Lottie/Animation - 1726871315481.json",
-                                width: 200,
-                                height: 200,
+                                width: AppSizeW.s200,
+                                height: AppSizeH.s200,
                                 fit: BoxFit.fill,
                               ),
                             ),
-                            const SizedBox(height: 20),
-                            const Text(
+                            SizedBox(height: AppSizeH.s20),
+                            Text(
                               "Done!",
                               style: TextStyle(
-                                color: Color(0xff1CB26B),
-                                fontSize: 30,
+                                color: AppVar.buttonColor,
+                                fontSize: AppSizeSp.s30,
                               ),
                               textAlign: TextAlign.center,
                             ),
                             Container(
-                              margin: const EdgeInsets.symmetric(vertical: 20),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 15),
+                              margin: EdgeInsets.symmetric(vertical: AppSizeH.s20),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: AppSizeH.s5, horizontal: AppSizeW.s15),
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  width: 1,
-                                  color: const Color(0xff1CB26B),
+                                  width: AppSizeW.s1,
+                                  color:  AppVar.buttonColor,
                                 ),
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(AppSizeR.s10),
                               ),
-                              child: const Text(
+                              child: Text(
                                 "Waiting for admin approval",
                                 style: TextStyle(
                                   color: AppVar.seconndTextColor,
-                                  fontSize: 16,
+                                  fontSize: AppSizeSp.s16,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -105,8 +105,8 @@ class RegesterScreenTapletLayout extends GetView<RegisterController> {
                     }
                   }),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 30),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: AppSizeW.s40, vertical: AppSizeH.s30),
                     child: Obx(
                       () => Opacity(
                         opacity: controller.isWaitAdminApproved.value ? 0 : 1,

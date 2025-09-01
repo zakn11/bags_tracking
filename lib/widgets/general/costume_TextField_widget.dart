@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class CustomeTextFormField extends StatefulWidget {
   CustomeTextFormField({
@@ -42,19 +43,6 @@ class _CustomeTextFormFieldState extends State<CustomeTextFormField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        //1
-        // Padding(
-        //   padding: const EdgeInsets.only(bottom: 15.0),
-        //   child: Text(
-        //     title,
-        //     style: const TextStyle(
-        //       color: ThemesStyles.textColor,
-        //       fontWeight: FontWeight.w500,
-        //       fontSize: 18.0,
-        //     ),
-        //   ),
-        // ),
-        //2
         TextFormField(
           focusNode: _focusNode,
           controller: widget.controller,
@@ -68,9 +56,6 @@ class _CustomeTextFormFieldState extends State<CustomeTextFormField> {
           ),
           decoration: InputDecoration(
             prefixIcon: widget.prefixIcon,
-            //  widget.title == "Password"
-            //     ? const Icon(Icons.lock)
-            //     :widget.title == "Email"? const Icon(Icons.email):null,
             suffixIcon: widget.title == "Password"
                 ? GestureDetector(
                     onTap: () {
@@ -90,21 +75,20 @@ class _CustomeTextFormFieldState extends State<CustomeTextFormField> {
                     : const Color(0xff5555),
             filled: true,
             hintText: widget.hintText,
-            hintStyle: const TextStyle(
-                color: Color.fromARGB(71, 105, 105, 105), fontSize: 16),
+            hintStyle: TextStyle(
+                color: Color.fromARGB(71, 105, 105, 105), fontSize: AppSizeSp.s16),
 
-            // Customize the border color and radius
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade300, width: 2.0),
+              borderSide: BorderSide(color: Colors.grey.shade300, width: AppSizeW.s2),
               borderRadius:
-                  BorderRadius.circular(AppVar.borderradiusprimary + 5),
+                  BorderRadius.circular(AppVar.borderradiusprimary + AppSizeR.s5),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppVar.primary, width: 2.0),
+              borderSide: BorderSide(color: AppVar.primary, width: AppSizeW.s2),
               borderRadius:
-                  BorderRadius.circular(AppVar.borderradiusprimary + 5),
+                  BorderRadius.circular(AppVar.borderradiusprimary + AppSizeR.s5),
             ),
-            contentPadding: const EdgeInsets.all(15.0),
+            contentPadding: EdgeInsets.all(AppSizeW.s15),
           ),
           validator: widget.validator,
         ),

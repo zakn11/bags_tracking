@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class CustomeLoginTextFormField extends StatefulWidget {
   const CustomeLoginTextFormField({
@@ -98,19 +99,19 @@ class _CustomeLoginTextFormFieldState extends State<CustomeLoginTextFormField> {
             fontSize: textFieldFontSize * 0.9), 
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-              color: AppVar.secondarySoft, width: 2.0),
+              color: AppVar.secondarySoft, width: AppSizeW.s2),
         ),
         focusedBorder: UnderlineInputBorder(
           borderSide:
-              BorderSide(color: AppVar.secondary, width: 2.0)
+              BorderSide(color: AppVar.secondary, width: AppSizeW.s2)
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+          borderRadius: BorderRadius.circular(AppSizeR.s10),
+          borderSide: BorderSide(color: Colors.red, width: AppSizeW.s2),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: const BorderSide(color: Colors.redAccent, width: 2.0),
+          borderRadius: BorderRadius.circular(AppSizeR.s10),
+          borderSide: BorderSide(color: Colors.redAccent, width: AppSizeW.s2),
         ),
         errorStyle: const TextStyle(
           color: Colors.redAccent,

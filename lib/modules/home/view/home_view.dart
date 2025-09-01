@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:tracking_system_app/modules/home/controller/home_controller.dart';
 import 'package:tracking_system_app/network_util.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 import 'package:tracking_system_app/widgets/general/main_loading_widget.dart';
 import 'package:tracking_system_app/widgets/home/activites_widget.dart';
 import 'package:tracking_system_app/widgets/home/home_view_documents_icon_widget.dart';
@@ -16,13 +18,12 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     final isTaplet = MediaQuery.of(context).size.width > 800 &&
         MediaQuery.of(context).size.height > 800;
 
-    final dataFontSize = screenWidth * (0.066);
+    final dataFontSize = MediaQuery.of(context).size.width * (0.066);
     final screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Obx(() {
@@ -35,18 +36,15 @@ class HomeView extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: Image.asset(
-                'assets/images/HomeBackground.png', 
+                'assets/images/HomeBackground.png',
                 fit: BoxFit.cover,
               ),
             ),
-
             Positioned.fill(
               child: BackdropFilter(
-                filter: ImageFilter.blur(
-                    sigmaX: 1, sigmaY: 1), 
+                filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
                 child: Container(
-                  color: AppVar.primary
-                      .withOpacity(.9),
+                  color: AppVar.primary.withValues(alpha: .9),
                 ),
               ),
             ),
@@ -72,7 +70,7 @@ class HomeView extends StatelessWidget {
                     homeController.showCustomSignOutDialog(context);
                   },
                   icon: Icon(
-                    size: isTaplet ? 40 : null,
+                    size: isTaplet ? AppSizeSp.s40 : null,
                     Icons.logout,
                     color: AppVar.seconndTextColor,
                   ),
@@ -84,14 +82,14 @@ class HomeView extends StatelessWidget {
                           context, homeController);
                     },
                     icon: Icon(
-                      size: isTaplet ? 40 : null,
+                      size: isTaplet ? AppSizeSp.s40 : null,
                       Icons.messenger_outline,
                       color: AppVar.seconndTextColor,
                     ),
                   ),
-                  if ($.role != "worker")
+                  if ($.role != "store_employee")
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.symmetric(horizontal: AppSizeW.s15),
                       child: Obx(
                         () => GestureDetector(
                           onTap: () {
@@ -102,15 +100,14 @@ class HomeView extends StatelessWidget {
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 100),
                             width: homeController.isCostumersIconPressed.value
-                                ? 28
-                                : 23,
+                                ? AppSizeW.s23
+                                : AppSizeW.s20,
                             height: homeController.isCostumersIconPressed.value
-                                ? 28
-                                : 23,
+                                ? AppSizeH.s21
+                                : AppSizeH.s18,
                             child: Image.asset(
                               color: Colors.white,
                               "assets/images/customer.png",
-                              // "assets/images/documents_icon.png",
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -119,15 +116,12 @@ class HomeView extends StatelessWidget {
                     ),
                 ],
               ),
-
               body: OrientationBuilder(builder: (context, orientation) {
                 return SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.only(
-                      top: 20.0,
-                      bottom: MediaQuery.of(context)
-                          .viewInsets
-                          .bottom, 
+                      top: AppSizeH.s20,
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,51 +130,64 @@ class HomeView extends StatelessWidget {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              //===========================Welcome Message========================
                               Padding(
                                 padding: EdgeInsets.only(
-                                    right: isTaplet ? 40 : 20,
-                                    left: isTaplet ? 40 : 20,
+                                    right:
+                                        isTaplet ? AppSizeW.s40 : AppSizeW.s20,
+                                    left:
+                                        isTaplet ? AppSizeW.s40 : AppSizeW.s20,
                                     bottom: 0),
                                 child: Stack(
                                   children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(100),
-                                      child: SizedBox(
-                                        width: isTaplet ? 90 : 60,
-                                        height: isTaplet ? 90 : 60,
-                                        child: homeController
-                                                    .myInfoModel.value.image !=
-                                                null
-                                            ? CachedNetworkImage(
-                                                imageUrl: homeController
-                                                    .myInfoModel.value.image
-                                                    .toString(),
-                                                placeholder: (context, url) =>
-                                                    const MainLoadingWidget(),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Image.asset(
+                                    GestureDetector(
+                                      onTap: () {
+                                        log("zak ${$.token1}");
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                            AppSizeR.s100),
+                                        child: SizedBox(
+                                          width: isTaplet
+                                              ? AppSizeW.s90
+                                              : AppSizeW.s60,
+                                          height: isTaplet
+                                              ? AppSizeH.s90
+                                              : AppSizeH.s60,
+                                          child: homeController.myInfoModel
+                                                      .value.image !=
+                                                  null
+                                              ? CachedNetworkImage(
+                                                  imageUrl: homeController
+                                                      .myInfoModel.value.image
+                                                      .toString(),
+                                                  placeholder: (context, url) =>
+                                                      const MainLoadingWidget(),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Image.asset(
+                                                    "assets/images/user.png",
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : Image.asset(
                                                   "assets/images/user.png",
                                                   fit: BoxFit.cover,
                                                 ),
-                                                fit: BoxFit.cover,
-                                              )
-                                            : Image.asset(
-                                                "assets/images/user.png",
-                                                fit: BoxFit.cover,
-                                              ),
+                                        ),
                                       ),
                                     ),
                                     Positioned(
-                                      bottom: isTaplet ? 8 : 4,
-                                      right: isTaplet ? 8 : 4,
+                                      bottom:
+                                          isTaplet ? AppSizeH.s8 : AppSizeH.s4,
+                                      right:
+                                          isTaplet ? AppSizeW.s8 : AppSizeW.s4,
                                       child: Container(
-                                        width: 10,
-                                        height: 10,
+                                        width: AppSizeW.s10,
+                                        height: AppSizeH.s10,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(1000.0),
+                                              BorderRadius.circular(1000),
                                           color: const Color.fromARGB(
                                               255, 13, 218, 119),
                                         ),
@@ -189,13 +196,13 @@ class HomeView extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              const SizedBox(height: 10),
-                              //----------------------------
+                              SizedBox(height: AppSizeH.s10),
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: isTaplet ? 40 : 20),
+                                    horizontal:
+                                        isTaplet ? AppSizeW.s40 : AppSizeW.s20),
                                 child: Text(
-                                  "Hi ${homeController.myInfoModel.value.name.split(' ')[0]}!",
+                                  "Hi ${homeController.myInfoModel.value.firstName.split(' ')[0]}!",
                                   style: TextStyle(
                                     fontFamily: "Allerta",
                                     fontSize: dataFontSize,
@@ -204,14 +211,14 @@ class HomeView extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              //----------------------------
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: isTaplet ? 40 : 20),
+                                    horizontal:
+                                        isTaplet ? AppSizeW.s40 : AppSizeW.s20),
                                 child: Text(
-                                  "ID: ${homeController.myInfoModel.value.employeeNumber ?? homeController.myInfoModel.value.id} / ${homeController.myInfoModel.value.role}",
-                                  style: const TextStyle(
-                                    fontSize: 18,
+                                  "ID: ${homeController.myInfoModel.value.id} / ${homeController.myInfoModel.value.role}",
+                                  style: TextStyle(
+                                    fontSize: AppSizeSp.s18,
                                     color: AppVar.seconndTextColor,
                                   ),
                                 ),
@@ -219,11 +226,7 @@ class HomeView extends StatelessWidget {
                             ],
                           );
                         }),
-
-                        //----------------------------
-                        const SizedBox(height: 50),
-
-                        //===========================End Welcome Message========================
+                        SizedBox(height: AppSizeH.s50),
                         ActivitesWidget(homeController: homeController),
                       ],
                     ),
@@ -231,7 +234,6 @@ class HomeView extends StatelessWidget {
                 );
               }),
             ),
-            /*The background with opacity*/
             Obx(() {
               if (homeController.isCustomersLoading.value) {
                 return Stack(
@@ -241,11 +243,9 @@ class HomeView extends StatelessWidget {
                       opacity: 0.9,
                       child: Container(
                           height: screenHeight,
-                          width: screenWidth,
+                          width: MediaQuery.of(context).size.width,
                           color: const Color(0xffD4D4D4),
-
-                          // color: AppVar.primaryExtraSoft,
-                          padding: const EdgeInsets.all(40),
+                          padding: EdgeInsets.all(AppSizeW.s40),
                           child: const MainLoadingWidget()),
                     )),
                     Positioned(
@@ -253,7 +253,6 @@ class HomeView extends StatelessWidget {
                       child: IconButton(
                         color: Colors.white,
                         onPressed: () {
-                          // Get.back();
                           homeController.isCostumersIconPressed.value =
                               !homeController.isCostumersIconPressed.value;
                         },

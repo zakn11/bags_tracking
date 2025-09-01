@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tracking_system_app/modules/home/controller/home_controller.dart';
 import 'package:tracking_system_app/widgets/home/customers_list_widget.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 import '../../style/app_var.dart';
 
@@ -16,8 +17,6 @@ class HomeViewCustomersIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTaplet = MediaQuery.of(context).size.width > 800 &&
-        MediaQuery.of(context).size.height > 800;
     return StreamBuilder<ConnectivityResult>(
         stream: Connectivity().onConnectivityChanged.map((list) => list.first),
         builder: (context, snapshot) {
@@ -28,7 +27,6 @@ class HomeViewCustomersIconWidget extends StatelessWidget {
                       AnimatedPositioned(
                         duration: const Duration(milliseconds: 100),
                         child: GestureDetector(
-                          /*to leave the interface when i click anywhere*/
                           onTap: () {
                             controller.isCostumersIconPressed.value = false;
                           },
@@ -54,7 +52,6 @@ class HomeViewCustomersIconWidget extends StatelessWidget {
                         child: IconButton(
                           color: Colors.white,
                           onPressed: () {
-                            // Get.back();
                             controller.isCostumersIconPressed.value =
                                 !controller.isCostumersIconPressed.value;
                           },
@@ -63,9 +60,9 @@ class HomeViewCustomersIconWidget extends StatelessWidget {
                       ),
                       if (controller.isCostumersIconPressed.value)
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20.0),
+                          padding: EdgeInsets.symmetric(vertical: AppSizeH.s20),
                           child: snapshot.data == ConnectivityResult.none
-                              ? _noInternetWidget(isTaplet)
+                              ? _noInternetWidget()
                               : CustomersListWidget(controller: controller),
                         ),
                     ],
@@ -78,7 +75,6 @@ class HomeViewCustomersIconWidget extends StatelessWidget {
                         AnimatedPositioned(
                           duration: const Duration(milliseconds: 100),
                           child: GestureDetector(
-                            /*to leave the interface when i click anywhere*/
                             onTap: () {
                               controller.isCostumersIconPressed.value = false;
                             },
@@ -87,7 +83,7 @@ class HomeViewCustomersIconWidget extends StatelessWidget {
                               opacity: controller.isCostumersIconPressed.value
                                   ? 0.9
                                   : 0.0,
-                              child: Container(
+                              child: Container( 
                                 width: controller.isCostumersIconPressed.value
                                     ? MediaQuery.sizeOf(context).width
                                     : 0,
@@ -102,9 +98,8 @@ class HomeViewCustomersIconWidget extends StatelessWidget {
                         Positioned(
                           left: 0,
                           child: IconButton(
-                            color: Colors.white,
+                            color: AppVar.primary,
                             onPressed: () {
-                              // Get.back();
                               controller.isCostumersIconPressed.value =
                                   !controller.isCostumersIconPressed.value;
                             },
@@ -113,7 +108,8 @@ class HomeViewCustomersIconWidget extends StatelessWidget {
                         ),
                         if (controller.isCostumersIconPressed.value)
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20.0),
+                            padding:
+                                EdgeInsets.symmetric(vertical: AppSizeH.s20),
                             child: CustomersListWidget(controller: controller),
                           ),
                       ],
@@ -123,21 +119,21 @@ class HomeViewCustomersIconWidget extends StatelessWidget {
         });
   }
 
-  Widget _noInternetWidget(isTaplet) {
+  Widget _noInternetWidget() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Image(
-            image: AssetImage("assets/images/no-internet.png"),
-            width: 150,
-            height: 150,
+          Image(
+            image: const AssetImage("assets/images/no-internet.png"),
+            width: AppSizeW.s150,
+            height: AppSizeH.s150,
           ),
-          SizedBox(height: 10),
+          SizedBox(height: AppSizeH.s10),
           Text(
             "Connect to Internet and try again",
             style: TextStyle(
-              fontSize: isTaplet ? 36 : 16,
+              fontSize: AppSizeSp.s16,
               fontFamily: "ABeeZee",
               color: AppVar.primary,
               decoration: TextDecoration.none,

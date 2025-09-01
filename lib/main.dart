@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tracking_system_app/controller/life_cycle_controller.dart';
@@ -19,23 +20,41 @@ void main() async {
   runApp(const MyApp());
 }
 
+bool get isTablet {
+  final firstView = WidgetsBinding.instance.platformDispatcher.views.first;
+  final logicalShortestSide =
+      firstView.physicalSize.shortestSide / firstView.devicePixelRatio;
+  return logicalShortestSide > 600;
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     Get.put(LifecycleController());
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Traking System',
-      theme: AppVar.lightTheme,
-      darkTheme: AppVar.darkTheme,
-      themeMode: ThemeMode.system,
-      initialRoute: sharedLoginToken != null
-          ? Routes.HOME
-          : Routes
-              .SPLASH_SCREEN, 
-      getPages: AppPages.routes,
+    return ScreenUtilInit(
+      designSize: isTablet ? const Size(1194, 834) : const Size(390, 844),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Tracking System',
+          theme: AppVar.lightTheme,
+          darkTheme: AppVar.darkTheme,
+          themeMode: ThemeMode.system,
+          initialRoute:
+              sharedLoginToken != null ? Routes.HOME : Routes.SPLASH_SCREEN,
+          getPages: AppPages.routes,
+          builder: (context, widget) {
+            //NOTE FROM ZAK:  this makes sure ScreenUtil is available everywhere
+            ScreenUtil.init(context);
+            return widget!;
+          },
+          home: child,
+        );
+      },
     );
   }
 }

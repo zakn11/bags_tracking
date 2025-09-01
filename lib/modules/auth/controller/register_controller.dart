@@ -8,7 +8,8 @@ import 'package:tracking_system_app/widgets/toast/custom_toast.dart';
 
 class RegisterController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  final TextEditingController fullNameController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   // final TextEditingController employeeNumberController =
   //     TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -17,7 +18,7 @@ class RegisterController extends GetxController
   final TextEditingController phoneNumberController = TextEditingController();
   final RadioController jopTitleController =
       Get.put(RadioController(), tag: 'JopTitle');
-  final List<String> radioData = ['Worker', 'Driver'];
+  final List<String> radioData = ['Store Employee', 'Driver'];
   // final TextEditingController jopTitleController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   RxBool isWaitAdminApproved = false.obs;
@@ -29,32 +30,31 @@ class RegisterController extends GetxController
       const Center(
         child: MainLoadingWidget(),
       ),
-      barrierDismissible: false, 
+      barrierDismissible: false,
     );
   }
 
   Future<void> sendInfoToAdmin() async {
-    // zak uncomment this lines
     try {
-      // final response = await $.post('/users/register', body: {
-      //   "name": fullNameController.text,
-      //   "phone": phoneNumberController.text,
-      //   "role":
-      //       jopTitleController.selectedValue.value == 0 ? "worker" : "driver",
-      //   "password": passwordController.text,
-      //   "confirm_password": confirmPasswordController.text,
-      // });
+      final response = await $.post('/register', body: {
+        "first_name": firstNameController.text,
+        "last_name": lastNameController.text,
+        'phone': "+971${phoneNumberController.text}",
+        "role": jopTitleController.selectedValue.value == 0
+            ? "store_employee"
+            : "driver",
+        "password": passwordController.text,
+        "password_confirmation": confirmPasswordController.text,
+      });
 
-      // if (response != null) {
-      //   isWaitAdminApproved.value = true;
-
-      //   Future.delayed(const Duration(seconds: 3), () {
-      //     isWaitAdminApproved.value = false;
-      //     Get.offAllNamed(Routes.LOGIN);
-      //   });
-
-      // }
-        Get.offAllNamed(Routes.LOGIN);
+      if (response != null) {
+        isWaitAdminApproved.value = true;
+        Future.delayed(const Duration(seconds: 3), () {
+          isWaitAdminApproved.value = false;
+          Get.offAllNamed(Routes.LOGIN);
+        });
+      }
+      // Get.offAllNamed(Routes.LOGIN);
 
       isLoading.value = false;
     } catch (e) {
@@ -63,7 +63,7 @@ class RegisterController extends GetxController
   }
 
   void validateForm() {
-    if (fullNameController.text.isEmpty) {
+    if (firstNameController.text.isEmpty) {
       Get.closeAllSnackbars();
       CustomToast.errorToast('Error', 'Please enter your Full Name');
       return;
@@ -129,13 +129,13 @@ class RegisterController extends GetxController
 
   @override
   void onClose() {
-    // lottieController.dispose(); 
+    // lottieController.dispose();
     super.onClose();
   }
 
   @override
   void dispose() {
-    fullNameController.dispose();
+    firstNameController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
     phoneNumberController.dispose();

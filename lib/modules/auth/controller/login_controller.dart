@@ -47,42 +47,40 @@ class LoginController extends GetxController {
 
   Future<void> login() async {
     if (Get.isDialogOpen!) {
-      Get.back(); 
+      Get.back();
     }
 
     Get.dialog(
       const Center(
         child: MainLoadingWidget(),
       ),
-      barrierDismissible:
-          false,
+      barrierDismissible: false,
     );
 
     isLoading.value = true;
     try {
-            Get.offAllNamed(Routes.HOME);
-      //zak uncoment this 
-      // final response = await $.post('/users/login', body: {
-      //   'phone': phoneNumberController.text,
-      //   'password': passwordController.text,
-      // });
-      // if (response != null) {
-      //   //TO PREVENT THE ADMIN TO SIGN IN TO APP
-      //   if (response['data']['role'] == "admin") {
-      //     Get.offAllNamed(Routes.LOGIN);
-      //     Alert.infoDialog(
-      //         message:
-      //             tr('Admins do not have permissions to sign this app in.'));
-      //   } else {
-      //     await $.setConnectionParams(
-      //       token: response['data']['token'],
-      //       userRole: response['data']['role'],
-      //     );
-      //     // Navigate to Home page on successful login
-      //     Get.offAllNamed(Routes.HOME);
-      //     Alert.toast('Logged in successfully');
-      //   }
-      // }
+      final response = await $.post('/loginUser', body: {
+        'phone': "+971${phoneNumberController.text}",
+        'password': passwordController.text,
+      });
+      if (response != null) {
+        //TO PREVENT THE ADMIN TO SIGN IN TO APP
+        if (response['data']['role'] == "admin" ||
+            response['data']['role'] == "super_admin" ||
+            response['data']['role'] == "admin_cook" ||
+            response['data']['role'] == "customer") {
+          Get.offAllNamed(Routes.LOGIN);
+          Alert.infoDialog(
+              message: tr('You do not have permissions to sign this app in.'));
+        } else {
+          await $.setConnectionParams(
+            token: response['data']['token'],
+            userRole: response['data']['role'],
+          );
+          Get.offAllNamed(Routes.HOME);
+          Alert.toast('Logged in successfully');
+        }
+      }
       isLoading.value = false;
     } catch (e) {
       CustomToast.errorToast("Error", "Error because : ${e.toString()}");

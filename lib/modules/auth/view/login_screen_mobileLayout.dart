@@ -13,9 +13,10 @@ class LoginScreenMobileLayout extends GetView<LoginController> {
       child: Scaffold(
         // resizeToAvoidBottomInset: false,
         backgroundColor:
-            MediaQuery.of(context).orientation == Orientation.landscape
-                ? AppVar.primary
-                : AppVar.background,
+            // MediaQuery.of(context).orientation == Orientation.landscape
+            //     ?
+            AppVar.primary,
+        // : AppVar.background,
         body: OrientationBuilder(
           builder: (context, orientation) {
             final screenWidth = MediaQuery.sizeOf(context).width;
@@ -33,14 +34,14 @@ class LoginScreenMobileLayout extends GetView<LoginController> {
             } else {
               return Stack(
                 children: [
-                  Positioned(
-                    bottom: 0,
-                    child: Image(
-                      width: screenWidth,
-                      image: const AssetImage('assets/images/Rectingle.jpg'),
-                      fit:                          BoxFit.cover,
-                    ),
-                  ),
+                  // Positioned(
+                  //   bottom: 0,
+                  //   child: Image(
+                  //     width: screenWidth,
+                  //     image: const AssetImage('assets/images/Rectingle.jpg'),
+                  //     fit: BoxFit.cover,
+                  //   ),
+                  // ),
                   LoginBody(
                     isLandscape: isLandscape,
                     screenHeight: screenHeight,

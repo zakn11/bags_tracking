@@ -7,6 +7,7 @@ import 'package:tracking_system_app/routes/app_pages.dart';
 import 'package:tracking_system_app/style/app_var.dart';
 import 'package:tracking_system_app/widgets/auth/costume_login_TextField_widget.dart';
 import 'package:tracking_system_app/widgets/auth/login-defult_button.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class LoginBody extends StatelessWidget {
   const LoginBody({
@@ -24,9 +25,9 @@ class LoginBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: 40,
+          horizontal: AppSizeW.s40,
           //IF TAPLATE
-          vertical: screenWidth > 850 ? 40 : 0),
+          vertical: screenWidth > 850 ? AppSizeH.s40 : 0),
       child: GetBuilder<LoginController>(
         init: LoginController(),
         builder: (controller) {
@@ -79,7 +80,7 @@ class LoginBodyBody extends StatelessWidget {
         Padding(
           padding: screenWidth > 850
               ? const EdgeInsets.all(0)
-              : EdgeInsets.only(top: isLandscape ? 20.0 : 0),
+              : EdgeInsets.only(top: isLandscape ? AppSizeH.s20 : 0),
           child: Center(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(1000),
@@ -87,7 +88,8 @@ class LoginBodyBody extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(1000),
                     color: AppVar.background,
-                    border: Border.all(width: 3, color: AppVar.primary)),
+                    border:
+                        Border.all(width: AppSizeW.s3, color: AppVar.primary)),
                 width: 150,
                 height: 150,
                 child: Image.asset(
@@ -98,23 +100,20 @@ class LoginBodyBody extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-            height: isLandscape
-                ? screenHeight * 0.05
-                : screenWidth * 0.15),
-        const SizedBox(height: 20),
-        const Padding(
-          padding: EdgeInsets.only(bottom: 30.0, top: 30),
+        SizedBox(height: isLandscape ? screenHeight * 0.05 : 0),
+        SizedBox(height: AppSizeH.s20),
+        Padding(
+          padding: EdgeInsets.only(bottom: AppSizeH.s30, top: AppSizeH.s30),
           child: Text(
             "Sign In",
             style: TextStyle(
               color: AppVar.seconndTextColor,
-              fontSize: 40,
+              fontSize: AppSizeSp.s40,
               shadows: [
                 Shadow(
-                  color: Color.fromARGB(255, 79, 79, 79),
-                  offset: Offset(2, 4),
-                  blurRadius: 5,
+                  color: const Color.fromARGB(255, 79, 79, 79),
+                  offset: Offset(AppSizeW.s2, AppSizeH.s4),
+                  blurRadius: AppSizeW.s5,
                 ),
               ],
             ),
@@ -125,29 +124,29 @@ class LoginBodyBody extends StatelessWidget {
           inputType: TextInputType.number,
           title: 'Phone Number',
           prefixIcon: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: AppSizeW.s8),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(
                   'assets/images/uae_flag.png',
-                  width: 24,
-                  height: 24,
+                  width: AppSizeW.s24,
+                  height: AppSizeH.s24,
                 ),
-                const SizedBox(width: 5),
+                SizedBox(width: AppSizeW.s5),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  decoration: const BoxDecoration(
+                  padding: EdgeInsets.symmetric(horizontal: AppSizeW.s5),
+                  decoration: BoxDecoration(
                       border: Border(
                     right: BorderSide(
                       color: AppVar.seconndTextColor,
-                      width: 1.0,
+                      width: AppSizeW.s1,
                     ),
                   )),
-                  child: const Text(
+                  child: Text(
                     '+971',
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: AppSizeSp.s14,
                       color: AppVar.seconndTextColor,
                       fontWeight: FontWeight.bold,
                     ),
@@ -171,21 +170,22 @@ class LoginBodyBody extends StatelessWidget {
           onTap: () {
             Get.toNamed(Routes.FORGOT_PASSWORD);
           },
-          child: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 15),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: AppSizeH.s15),
             child: Align(
               alignment: Alignment.centerRight,
               child: Text(
                 "Forgot password?",
-                style: TextStyle(fontSize: 13, color: AppVar.seconndTextColor),
+                style: TextStyle(
+                    fontSize: AppSizeSp.s13, color: AppVar.seconndTextColor),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 15),
+        SizedBox(height: AppSizeH.s15),
         LoginDefultButton(
-          fontsize: AppVar.mainFontSize,
-          buttonColor: const Color(0xff1CB26B),
+          fontsize: AppSizeSp.s16,
+          buttonColor:  AppVar.buttonColor,
           borderColor: Colors.transparent,
           textColor: AppVar.seconndTextColor,
           title: "SIGN IN",
@@ -195,9 +195,9 @@ class LoginBodyBody extends StatelessWidget {
             }
           },
         ),
-        const SizedBox(height: 15),
+        SizedBox(height: AppSizeH.s15),
         Padding(
-          padding: const EdgeInsets.only(bottom: 30.0),
+          padding: EdgeInsets.only(bottom: AppSizeH.s30),
           child: Center(
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -206,7 +206,7 @@ class LoginBodyBody extends StatelessWidget {
                   "Don't have an account? ",
                   style: TextStyle(
                     color: AppVar.seconndTextColor,
-                    fontSize: AppVar.littelFontSize,
+                    fontSize: AppSizeSp.s14,
                   ),
                 ),
                 GestureDetector(
@@ -214,16 +214,17 @@ class LoginBodyBody extends StatelessWidget {
                     Get.toNamed(Routes.REGISTER);
                   },
                   child: DecoratedBox(
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       border: Border(
-                          bottom: BorderSide(color: Colors.white, width: 1.0)),
+                          bottom: BorderSide(
+                              color: Colors.white, width: AppSizeW.s1)),
                     ),
                     child: Text(
                       "Sign up",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: AppVar.littelFontSize,
-                        color: const Color(0xff1CB26B),
+                        fontSize: AppSizeSp.s14,
+                        color:  AppVar.buttonColor,
                       ),
                     ),
                   ),

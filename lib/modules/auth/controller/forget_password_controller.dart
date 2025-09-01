@@ -6,7 +6,8 @@ import 'package:tracking_system_app/widgets/general/main_loading_widget.dart';
 import 'package:tracking_system_app/widgets/toast/custom_toast.dart';
 
 class ForgetPasswordController extends GetxController {
-  final TextEditingController fullNameController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
@@ -17,9 +18,14 @@ class ForgetPasswordController extends GetxController {
   var isLoading = false.obs;
 
   void validateForm() {
-    if (fullNameController.text.isEmpty) {
+    if (firstNameController.text.isEmpty) {
       Get.closeAllSnackbars();
-      CustomToast.errorToast('Error', 'Please enter your Full Name');
+      CustomToast.errorToast('Error', 'Please enter your First Name');
+      return;
+    }
+    if (lastNameController.text.isEmpty) {
+      Get.closeAllSnackbars();
+      CustomToast.errorToast('Error', 'Please enter your Last Name');
       return;
     }
 
@@ -75,21 +81,19 @@ class ForgetPasswordController extends GetxController {
       const Center(
         child: MainLoadingWidget(),
       ),
-      barrierDismissible: false, 
+      barrierDismissible: false,
     );
   }
 
   Future<void> sendInfoToAdmin() async {
     isLoading.value = true;
     try {
-      final response = await $.post('/users/reset-password', body: {
-        "phone": phoneNumberController.text,
-        "password": passwordController.text,
-        "confirm_password": confirmPasswordController.text,
+      final response = await $.post('/forgetPassword', body: {
+        'full_name': "${firstNameController.text} ${lastNameController.text}",
+        'phone': "+971${phoneNumberController.text}",
+        "new_password": passwordController.text,
+        "new_password_confirmation": confirmPasswordController.text,
       });
-      // Get.back();
-
-//if success :
 
       if (response != null) {
         isWaitAdminApproved.value = true;
@@ -101,10 +105,6 @@ class ForgetPasswordController extends GetxController {
 
       isLoading.value = false;
     } catch (e) {
-      // close the dialog if an error occurs
-      // if (Get.isDialogOpen!) {
-      //   Get.back(); 
-      // }
       CustomToast.errorToast("Error", "Error because : ${e.toString()}");
     } finally {
       isLoading.value = false;

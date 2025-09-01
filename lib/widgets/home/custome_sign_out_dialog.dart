@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tracking_system_app/modules/home/controller/home_controller.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 import 'package:tracking_system_app/widgets/general/main_loading_widget.dart';
 
 class CustomSignOutDialog extends StatelessWidget {
@@ -14,11 +15,11 @@ class CustomSignOutDialog extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), 
+        borderRadius: BorderRadius.circular(AppSizeR.s10), 
       ),
       backgroundColor: Colors.white, 
       child: Padding(
-        padding: const EdgeInsets.all(20.0), 
+        padding: EdgeInsets.all(AppSizeW.s20), 
         child: SizedBox(
           width: isLandscape ? MediaQuery.sizeOf(context).width * 0.4 : null,
           child: Stack(
@@ -29,78 +30,73 @@ class CustomSignOutDialog extends StatelessWidget {
                       .min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Title
-                    const SizedBox(
-                        height: 5),
-                    const Center(
+                    SizedBox(
+                        height: AppSizeH.s5),
+                    Center(
                       child: Text(
                         "Sign Out",
                         style: TextStyle(
-                          fontSize: 22.85,
+                          fontSize: AppSizeSp.s22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    const SizedBox(
-                        height: 20), 
-                    const Center(
+                    SizedBox(
+                        height: AppSizeH.s20), 
+                    Center(
                       child: Text(
                         "Do you want to log out?",
                         style: TextStyle(
                           color: Color(0xff878787),
-                          fontSize: 13.33,
+                          fontSize: AppSizeSp.s13,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    const SizedBox(
-                        height: 20),
+                    SizedBox(
+                        height: AppSizeH.s20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        //-------------------Cancel button-------------------
                         GestureDetector(
                           onTap: () {
                             homeController.exitSignOutDialog();
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
+                            padding: EdgeInsets.symmetric(
+                                vertical: AppSizeH.s10, horizontal: AppSizeW.s20),
                             decoration: BoxDecoration(
                               border:
-                                  Border.all(color: const Color(0xffD6D6D6)),
+                                  Border.all(color: Color(0xffD6D6D6)),
                               color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(AppSizeR.s20),
                             ),
-                            child: const Text(
+                            child: Text(
                               "Cancel",
                               style: TextStyle(
                                 color: AppVar.textColor,
-                                fontSize: 13.33,
+                                fontSize: AppSizeSp.s13,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ),
-                        //-------------------Log out-------------------------
                         GestureDetector(
                           onTap: () async {
-                            //Here u will LOGOUT
                             await homeController.logout();
-                            // homeController.sendToAdmin();
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
+                            padding: EdgeInsets.symmetric(
+                                vertical: AppSizeH.s10, horizontal: AppSizeW.s20),
                             decoration: BoxDecoration(
-                              color: const Color(0xffFE8C00),
-                              borderRadius: BorderRadius.circular(20),
+                              color: Color(0xffFE8C00),
+                              borderRadius: BorderRadius.circular(AppSizeR.s20),
                             ),
-                            child: const Text(
+                            child: Text(
                               "Log Out",
                               style: TextStyle(
                                 color: AppVar.seconndTextColor,
-                                fontSize: 13.33,
+                                fontSize: AppSizeSp.s13,
                               ),
                             ),
                           ),
@@ -108,7 +104,7 @@ class CustomSignOutDialog extends StatelessWidget {
                       ],
                     ),
                     if (homeController.isLoading.value)
-                      const SizedBox(child: MainLoadingWidget())
+                      SizedBox(child: MainLoadingWidget())
                   ],
                 ),
               ),
@@ -120,14 +116,14 @@ class CustomSignOutDialog extends StatelessWidget {
                     homeController.exitSignOutDialog();
                   },
                   child: Container(
-                      padding: const EdgeInsets.all(5),
+                      padding: EdgeInsets.all(AppSizeW.s5),
                       decoration: BoxDecoration(
                           color: Colors.transparent,
                           border: Border.all(
-                              width: 1, color: const Color(0xffEDEDED)),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: const Icon(
-                        size: 18,
+                              width: AppSizeW.s1, color: Color(0xffEDEDED)),
+                          borderRadius: BorderRadius.circular(AppSizeR.s5)),
+                      child: Icon(
+                        size: AppSizeSp.s18,
                         Icons.close_rounded,
                         color: AppVar.textColor,
                       )),

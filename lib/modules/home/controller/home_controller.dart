@@ -15,7 +15,13 @@ class HomeController extends GetxController {
   RxBool isMyInfoLoading = false.obs;
   RxBool showLottieAnimation = false.obs;
   Rx<MyInfoDataModel> myInfoModel = MyInfoDataModel(
-          id: 0, name: "", phone: "", employeeNumber: "", image: null, role: "")
+          id: 0,
+          firstName: "",
+          lastName: "",
+          phone: "",
+          email: null,
+          image: null,
+          role: "")
       .obs;
   //==============Zak's Editation=======================
   RxBool isCostumersIconPressed = false.obs;
@@ -33,23 +39,12 @@ class HomeController extends GetxController {
   Future<void> initialize() async {
     isMyInfoLoading.value = true;
     try {
-      //zak uncomment this lines
-      // var response = await $.get('users/my-info');
-      // print(response);
+      var response = await $.get('getMyInfo');
+      print(response);
 
-      // if (response != null) {
-      //   myInfoModel.value = MyInfoDataModel.fromJson(response["data"]);
-      // }
-      //zak delete this lines ======================
-      myInfoModel.value = MyInfoDataModel(
-        id: 12,
-        name: "zak",
-        phone: '0969830277',
-        employeeNumber: '',
-        role: 'driver',
-        image: null,
-      );
-      //zak delete this lines ======================
+      if (response != null) {
+        myInfoModel.value = MyInfoDataModel.fromJson(response["data"]);
+      }
     } catch (e) {
       print("Error: $e");
       CustomToast.errorToast("Opps..", "Failed to load my info");
@@ -63,20 +58,19 @@ class HomeController extends GetxController {
     isLoading.value = true;
     try {
       // //zak uncomment this lines
-      // final response = await $.post('users/send-message', body: {
-      //   "type": "issue",
-      //   "message": issueDialogController.text,
-      // });
+      final response = await $.post('message/sendMessage', body: {
+        "data": issueDialogController.text,
+      });
 
-      // if (response != null) {
-      //   // await Future.delayed(Duration(seconds: 3));
-      //   showLottieAnimation.value = true;
-      //   issueDialogController.clear();
-      //   isTextFildFilled.value = false;
-      //   isLoading.value = false;
-      //   await Future.delayed(const Duration(seconds: 3));
-      //   Get.back(); 
-      // }
+      if (response != null) {
+        // await Future.delayed(Duration(seconds: 3));
+        showLottieAnimation.value = true;
+        issueDialogController.clear();
+        isTextFildFilled.value = false;
+        isLoading.value = false;
+        await Future.delayed(const Duration(seconds: 3));
+        Get.back();
+      }
     } catch (e) {
       CustomToast.errorToast("Error", "Error because : ${e.toString()}");
     } finally {
@@ -91,7 +85,6 @@ class HomeController extends GetxController {
     issueDialogController.clear();
   }
 
-
   void showCustomMessageDialog(
       BuildContext context, HomeController homeController) {
     showDialog(
@@ -100,15 +93,15 @@ class HomeController extends GetxController {
         if (MediaQuery.of(context).orientation == Orientation.landscape) {
           return SingleChildScrollView(
               child: CustomMessageDialog(
-            title: homeController.myInfoModel.value.name,
-            subtitle: homeController.myInfoModel.value.employeeNumber ??
-                homeController.myInfoModel.value.id.toString(),
+            title:
+                "${homeController.myInfoModel.value.firstName} ${homeController.myInfoModel.value.lastName}",
+            subtitle: homeController.myInfoModel.value.id.toString(),
           ));
         } else {
           return CustomMessageDialog(
-            title: homeController.myInfoModel.value.name,
-            subtitle: homeController.myInfoModel.value.employeeNumber ??
-                homeController.myInfoModel.value.id.toString(),
+            title:
+                "${homeController.myInfoModel.value.firstName} ${homeController.myInfoModel.value.lastName}",
+            subtitle: homeController.myInfoModel.value.id.toString(),
           );
         }
       },
@@ -117,7 +110,7 @@ class HomeController extends GetxController {
 //===========================================Sign out dialog================================================================
 
   void exitSignOutDialog() {
-    Get.back(); 
+    Get.back();
   }
 
   void showCustomSignOutDialog(BuildContext context) {
@@ -151,14 +144,12 @@ class HomeController extends GetxController {
   Future initializeCustomersTypes() async {
     isCustomersLoading.value = true;
 //zak uncomment this lines
-    // var data = await $
-    //     .get('customers/list?state=active&driver_id=${myInfoModel.value.id}');
-    // if (data != null) {
-    //   customersList.value = (data['data'] as List)
-    //       .map((e) => CustomerListDataModel.fromJson(e))
-    //       .toList();
-    // }
+    var data = await $.get('/getCustomerForDriver/${myInfoModel.value.id}');
+    if (data != null) {
+      customersList.value = (data['data'] as List)
+          .map((e) => CustomerListDataModel.fromJson(e))
+          .toList();
+    }
     isCustomersLoading.value = false;
-    // isDocumentsTypesInitialized.value = true;
   }
 }

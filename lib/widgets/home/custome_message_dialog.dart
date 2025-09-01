@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tracking_system_app/modules/home/controller/home_controller.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 import 'package:tracking_system_app/widgets/general/main_loading_widget.dart';
 
 class CustomMessageDialog extends StatelessWidget {
@@ -16,65 +17,61 @@ class CustomMessageDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppSizeR.s20),
       ),
-      backgroundColor: Colors.white, 
+      backgroundColor: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(AppSizeW.s20),
         child: Stack(
           children: [
             Column(
-              mainAxisSize: MainAxisSize
-                  .min,
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Title
                 Row(
                   children: [
                     Text(
-                      "${homeController.myInfoModel.value.role.capitalize} name: ",
-                      style: const TextStyle(
+                      "Name: ",
+                      style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 14,
+                        fontSize: AppSizeSp.s14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       title,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 14,
+                        fontSize: AppSizeSp.s14,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 5), 
+                SizedBox(height: AppSizeH.s5),
                 Row(
                   children: [
                     Text(
-                      "${homeController.myInfoModel.value.role.capitalize} ID: ",
-                      style: const TextStyle(
+                      "${homeController.myInfoModel.value.role.capitalize}_ID: ",
+                      style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 14,
+                        fontSize: AppSizeSp.s14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       subtitle,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 14,
+                        fontSize: AppSizeSp.s14,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(
-                    height: 40),
+                SizedBox(height: AppSizeH.s40),
 
-                // Big Text Form Field
                 TextFormField(
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: TextStyle(
+                    fontSize: AppSizeSp.s14,
                     color: AppVar.textColor,
                   ),
                   onChanged: (value) {
@@ -85,68 +82,62 @@ class CustomMessageDialog extends StatelessWidget {
                     }
                   },
                   controller: homeController.issueDialogController,
-                  maxLines: 9, 
+                  maxLines: 9,
                   decoration: InputDecoration(
                     hintText: 'Enter Your Problem',
-                    hintStyle: const TextStyle(
+                    hintStyle: TextStyle(
                       color: Color(0xffBFBFBF),
-                      fontSize: 12,
+                      fontSize: AppSizeSp.s12,
                     ),
-                
-
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(AppSizeR.s10),
                       borderSide:
-                          const BorderSide(color: AppVar.textColor, width: 2.0),
+                          BorderSide(color: AppVar.textColor, width: AppSizeW.s2),
                     ),
-                 
                     errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(AppSizeR.s10),
                       borderSide:
-                          const BorderSide(color: Colors.red, width: 2.0),
+                          BorderSide(color: Colors.red, width: AppSizeW.s2),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(AppSizeR.s10),
                       borderSide:
-                          const BorderSide(color: Colors.redAccent, width: 2.0),
+                          BorderSide(color: Colors.redAccent, width: AppSizeW.s2),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(
-                        10,
+                        AppSizeR.s10,
                       ),
-                      borderSide: const BorderSide(
+                      borderSide: BorderSide(
                           color: Color.fromARGB(255, 125, 125, 125),
-                          width: 1.0),
+                          width: AppSizeW.s1),
                     ),
                   ),
                 ),
-                const SizedBox(
-                    height: 20), 
+                SizedBox(height: AppSizeH.s20),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
+                  padding: EdgeInsets.only(bottom: AppSizeH.s10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    // mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         DateFormat('EEE, MMM d, y')
                             .format(DateTime.now())
                             .toString(),
                         style:
-                            const TextStyle(fontSize: 11, color: Colors.grey),
+                            TextStyle(fontSize: AppSizeSp.s11, color: Colors.grey),
                       ),
                       const Spacer(),
                       Obx(
                         () => homeController.isLoading.value
-                            ? const SizedBox(child: MainLoadingWidget())
-                            :
-                            Obx(() {
+                            ? SizedBox(child: MainLoadingWidget())
+                            : Obx(() {
                                 if (homeController.showLottieAnimation.value) {
                                   return Center(
                                     child: SizedBox(
-                                      width: 50,
-                                      height: 50,
+                                      width: AppSizeW.s50,
+                                      height: AppSizeH.s50,
                                       child: Lottie.asset(
                                         repeat: false,
                                         fit: BoxFit.fill,
@@ -164,8 +155,8 @@ class CustomMessageDialog extends StatelessWidget {
                                             homeController.sendToAdmin();
                                           },
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5, horizontal: 10),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: AppSizeH.s5, horizontal: AppSizeW.s10),
                                       decoration: BoxDecoration(
                                         color: homeController.isLoading.value
                                             ? Colors.transparent
@@ -177,7 +168,7 @@ class CustomMessageDialog extends StatelessWidget {
                                                 .isTextFildFilled.value
                                             ? Border.all(color: AppVar.primary)
                                             : null,
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(AppSizeR.s10),
                                       ),
                                       child: Text(
                                         "Send to admin",
@@ -186,7 +177,7 @@ class CustomMessageDialog extends StatelessWidget {
                                                   .isTextFildFilled.value
                                               ? AppVar.primary
                                               : AppVar.seconndTextColor,
-                                          fontSize: 14,
+                                          fontSize: AppSizeSp.s14,
                                         ),
                                       ),
                                     ),
@@ -197,21 +188,20 @@ class CustomMessageDialog extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Button
               ],
             ),
             Positioned(
-              left: 20,
-              top: 75,
+              left: AppSizeW.s20,
+              top: AppSizeH.s75,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
+                padding: EdgeInsets.symmetric(horizontal: AppSizeW.s5),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
-                child: const Text(
+                child: Text(
                   "Your Problem",
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: AppSizeSp.s12,
                     fontWeight: FontWeight.bold,
                     color: AppVar.textColor,
                   ),
@@ -229,8 +219,8 @@ class CustomMessageDialog extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.transparent,
                         border: Border.all(
-                            width: 1, color: const Color(0xffEDEDED)),
-                        borderRadius: BorderRadius.circular(5)),
+                            width: AppSizeW.s1, color: const Color(0xffEDEDED)),
+                        borderRadius: BorderRadius.circular(AppSizeR.s5)),
                     child: const Icon(
                       Icons.close_rounded,
                       color: AppVar.textColor,

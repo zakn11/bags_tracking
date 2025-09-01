@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tracking_system_app/helpers/helpers.dart';
 import 'package:tracking_system_app/style/app_var.dart';
-// import 'package:progress_dialog/progress_dialog.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class Alert {
   static bool? _progressDialog;
@@ -21,16 +21,16 @@ class Alert {
       Dialog(
         elevation: 0.0,
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSizeR.s10)),
         child: Wrap(
           children: [
             Container(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(AppSizeW.s20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  const SizedBox(height: 25.0),
+                  SizedBox(height: AppSizeH.s25),
                   text01(
                     '${tr('Please Wait')}..',
                   ),
@@ -54,11 +54,11 @@ class Alert {
       Dialog(
         elevation: 0.0,
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSizeR.s10)),
         child: Wrap(
           children: [
             Container(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(AppSizeW.s20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,8 +67,8 @@ class Alert {
                     message,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(
-                    height: 20.0,
+                  SizedBox(
+                    height: AppSizeH.s20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -80,10 +80,10 @@ class Alert {
                         child: Container(
                           width: (MediaQuery.of(Get.context!).size.width / 3.5),
                           alignment: Alignment.center,
-                          padding: const EdgeInsets.all(10.0),
+                          padding: EdgeInsets.all(AppSizeW.s10),
                           decoration: BoxDecoration(
                             color: Colors.grey[300],
-                            borderRadius: BorderRadius.circular(5.0),
+                            borderRadius: BorderRadius.circular(AppSizeR.s5),
                           ),
                           child: text01(
                             'No',
@@ -98,10 +98,10 @@ class Alert {
                         child: Container(
                           width: (MediaQuery.of(Get.context!).size.width / 3.5),
                           alignment: Alignment.center,
-                          padding: const EdgeInsets.all(10.0),
+                          padding: EdgeInsets.all(AppSizeW.s10),
                           decoration: BoxDecoration(
                             color: AppVar.primary,
-                            borderRadius: BorderRadius.circular(5.0),
+                            borderRadius: BorderRadius.circular(AppSizeR.s5),
                           ),
                           child: text01(
                             'Yes',
@@ -128,11 +128,11 @@ class Alert {
       Dialog(
         elevation: 0.0,
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSizeR.s10)),
         child: Wrap(
           children: [
             Container(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(AppSizeW.s20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -141,8 +141,8 @@ class Alert {
                     message,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(
-                    height: 20.0,
+                  SizedBox(
+                    height: AppSizeH.s20,
                   ),
                   TextField01(
                     minLines: 6,
@@ -154,13 +154,13 @@ class Alert {
                         : TextDirection.ltr,
                     decoration: InputDecoration(
                         labelText: tr('Message to patient'),
-                        errorStyle: const TextStyle(
-                            color: Colors.redAccent, fontSize: 16.0),
+                        errorStyle: TextStyle(
+                            color: Colors.redAccent, fontSize: AppSizeSp.s16),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0))),
+                            borderRadius: BorderRadius.circular(AppSizeR.s5))),
                   ),
-                  const SizedBox(
-                    height: 20.0,
+                  SizedBox(
+                    height: AppSizeH.s20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -172,10 +172,10 @@ class Alert {
                         child: Container(
                           width: (MediaQuery.of(Get.context!).size.width / 3.5),
                           alignment: Alignment.center,
-                          padding: const EdgeInsets.all(10.0),
+                          padding: EdgeInsets.all(AppSizeW.s10),
                           decoration: BoxDecoration(
                             color: Colors.grey[300],
-                            borderRadius: BorderRadius.circular(5.0),
+                            borderRadius: BorderRadius.circular(AppSizeR.s5),
                           ),
                           child: text01(
                             'No',
@@ -190,10 +190,10 @@ class Alert {
                         child: Container(
                           width: (MediaQuery.of(Get.context!).size.width / 3.5),
                           alignment: Alignment.center,
-                          padding: const EdgeInsets.all(10.0),
+                          padding: EdgeInsets.all(AppSizeW.s10),
                           decoration: BoxDecoration(
                             color: AppVar.primary,
-                            borderRadius: BorderRadius.circular(5.0),
+                            borderRadius: BorderRadius.circular(AppSizeR.s5),
                           ),
                           child: text01(
                             'Yes',
@@ -217,10 +217,10 @@ class Alert {
       Dialog(
         elevation: 0.0,
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSizeR.s10)),
         child: Directionality(
           child: Container(
-            padding: const EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(AppSizeW.s20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -228,8 +228,8 @@ class Alert {
                 text01(
                   message,
                 ),
-                const SizedBox(
-                  height: 20.0,
+                SizedBox(
+                  height: AppSizeH.s20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -241,10 +241,10 @@ class Alert {
                       child: Container(
                         width: (MediaQuery.of(Get.context!).size.width / 3.5),
                         alignment: Alignment.center,
-                        padding: const EdgeInsets.all(10.0),
+                        padding: EdgeInsets.all(AppSizeW.s10),
                         decoration: BoxDecoration(
                           color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(5.0),
+                          borderRadius: BorderRadius.circular(AppSizeR.s5),
                         ),
                         child: text01('Ok',
                             style: TextStyle(

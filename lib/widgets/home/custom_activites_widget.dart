@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:tracking_system_app/modules/home/controller/home_controller.dart';
 import 'package:tracking_system_app/network_util.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class CustomActivitiesCardWidget extends StatelessWidget {
   const CustomActivitiesCardWidget({
@@ -30,14 +31,11 @@ class CustomActivitiesCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    // final isLandscape =
-    //     MediaQuery.of(context).orientation == Orientation.landscape;
     final isTaplet = MediaQuery.of(context).size.width > 800;
-    final dataFontSize = screenWidth *
+    final dataFontSize = MediaQuery.of(context).size.width *
         (isTaplet ? 0.03 : 0.07); 
     return GestureDetector(
-      onTap: $.role == "worker" && label == "Delivered"
+      onTap: $.role == "store_employee" && label == "Delivered"
           ? () {}
           : () {
               homeController.selectedCardIndex.value = index;
@@ -52,22 +50,22 @@ class CustomActivitiesCardWidget extends StatelessWidget {
           child: Container(
             width: width,
             height: height,
-            margin: const EdgeInsets.symmetric(vertical: 20),
-            padding: const EdgeInsets.all(15),
+            margin: EdgeInsets.symmetric(vertical: AppSizeH.s20),
+            padding: EdgeInsets.all(AppSizeW.s15),
             decoration: BoxDecoration(
-              color: $.role == "worker" && label == "Delivered"
+              color: $.role == "store_employee" && label == "Delivered"
                   ? AppVar.background
                   : homeController.selectedCardIndex.value == index
                       ? const Color(0xff3AD189)
                       : AppVar.background,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(AppSizeR.s20),
               border: Border.all(
-                  color: $.role == "worker" && label == "Delivered"
+                  color: $.role == "store_employee" && label == "Delivered"
                       ? const Color.fromARGB(255, 207, 207, 207)
                       : const Color(0xff3AD189),
-                  width: 1)
+                  width: AppSizeW.s1)
               ,
-              boxShadow: $.role == "worker" && label == "Delivered"
+              boxShadow: $.role == "store_employee" && label == "Delivered"
                   ? null
                   : [
                       BoxShadow(
@@ -75,11 +73,11 @@ class CustomActivitiesCardWidget extends StatelessWidget {
                             ? Colors.black.withOpacity(
                                 0.4)
                             : Colors.black.withOpacity(0.2),
-                        spreadRadius: 2,
+                        spreadRadius: AppSizeW.s2,
                         blurRadius:
                             homeController.selectedCardIndex.value == index
-                                ? 3
-                                : 3,
+                                ? AppSizeW.s3
+                                : AppSizeW.s3,
                         offset: const Offset(0, 5),
                       ),
                     ],
@@ -88,27 +86,27 @@ class CustomActivitiesCardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Opacity(
-                  opacity: $.role == "worker" && label == "Delivered" ? 0.3 : 1,
+                  opacity: $.role == "store_employee" && label == "Delivered" ? 0.3 : 1,
                   child: Image.asset(
                     imageName,
                     width: isTaplet
                         ? isDeleverd
-                            ? 120
-                            : 100
+                            ? AppSizeW.s120
+                            : AppSizeW.s100
                         : isDeleverd
-                            ? 80
-                            : 60,
-                    height: isTaplet ? 100 : 60,
+                            ? AppSizeW.s80
+                            : AppSizeW.s60,
+                    height: isTaplet ? AppSizeH.s100 : AppSizeH.s60,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 25.0),
+                  padding: EdgeInsets.only(top: AppSizeH.s25),
                   child: SizedBox(
                     child: Text(
                       label,
                       style: TextStyle(
-                        fontSize: isTaplet ? dataFontSize : 16,
-                        color: $.role == "worker" && label == "Delivered"
+                        fontSize: isTaplet ? dataFontSize : AppSizeSp.s16,
+                        color: $.role == "store_employee" && label == "Delivered"
                             ? const Color.fromARGB(255, 207, 207, 207)
                             : homeController.selectedCardIndex.value == index
                                 ? AppVar.background

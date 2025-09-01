@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class DefultButton extends StatelessWidget {
   const DefultButton({
@@ -26,9 +27,9 @@ class DefultButton extends StatelessWidget {
         backgroundColor: buttonColor,
         shape: RoundedRectangleBorder(
             borderRadius:
-                BorderRadius.circular(AppVar.borderradiusprimary + 30),
-            side: BorderSide(color: borderColor, width: 2)),
-        fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 50.0),
+                BorderRadius.circular(AppVar.borderradiusprimary + AppSizeR.s30),
+            side: BorderSide(color: borderColor, width: AppSizeW.s2)),
+        fixedSize: Size(MediaQuery.of(context).size.width * 0.9, AppSizeH.s50),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

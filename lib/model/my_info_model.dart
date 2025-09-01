@@ -1,16 +1,18 @@
 class MyInfoDataModel {
     int id;
-    String name;
+    String firstName;
+    String lastName;
     String phone;
-    String? employeeNumber;
+    String? email;
     dynamic image;
     String role;
 
     MyInfoDataModel({
         required this.id,
-        required this.name,
+        required this.firstName,
+        required this.lastName,
         required this.phone,
-        required this.employeeNumber,
+        required this.email,
         required this.image,
         required this.role,
     });
@@ -19,9 +21,10 @@ class MyInfoDataModel {
     return MyInfoDataModel(
       id: json['id'],
       role: json['role'],
-      name: json['name'],
+      firstName: json['first_name'],
+      lastName: json['last_name'],
       phone: json['phone'],
-      employeeNumber: json['employee_number'],
+      email: json['email'],
       image: json['image'],
     );
   }
@@ -30,9 +33,10 @@ class MyInfoDataModel {
     return {
       'id': id,
       'role': role,
-      'name': name,
+      'first_name': firstName,
+      'last_name': lastName,
       'phone': phone,
-      'employee_number': employeeNumber,
+      'email': email,
       'image': image,
     };
   }

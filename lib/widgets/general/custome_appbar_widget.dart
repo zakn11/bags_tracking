@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -26,23 +27,23 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
           : null,
       title: Text(
         title,
-        style: const TextStyle(
-          fontSize: 24,
+        style:  TextStyle(
+          fontSize: AppSizeSp.s24,
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
       ),
       centerTitle: true,
       flexibleSpace: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
+        decoration:  BoxDecoration(
+          gradient: const LinearGradient(
             colors: [Color(0xff0f2027), Color(0xff203a43), Color(0xff2c5364)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
+            bottomLeft: Radius.circular(AppSizeR.s30),
+            bottomRight: Radius.circular(AppSizeR.s30),
           ),
         ),
       ),
@@ -57,5 +58,5 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 10);
+  Size get preferredSize =>  Size.fromHeight(kToolbarHeight + AppSizeH.s10);
 }

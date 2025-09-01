@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class CustomToast {
   static errorToast(String? title, String? message) {
@@ -15,13 +16,13 @@ class CustomToast {
             "assets/icons/info-circle.svg",
             color: Colors.white,
           ),
-          SizedBox(width: 16),
+          SizedBox(width: AppSizeW.s16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(bottom: 4),
+                  margin: EdgeInsets.only(bottom: AppSizeH.s4),
                   child: Text(
                     title ?? "error",
                     style: TextStyle(
@@ -41,9 +42,9 @@ class CustomToast {
         ],
       ),
       backgroundColor: AppVar.error,
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      margin: EdgeInsets.symmetric(horizontal: 16),
-      borderRadius: 8,
+      padding: EdgeInsets.symmetric(horizontal: AppSizeW.s16, vertical: AppSizeH.s10),
+      margin: EdgeInsets.symmetric(horizontal: AppSizeW.s16),
+      borderRadius: AppSizeR.s8,
       snackPosition: SnackPosition.TOP,
     );
   }
@@ -59,13 +60,13 @@ class CustomToast {
             "assets/icons/success-circle.svg",
             color: Colors.white,
           ),
-          SizedBox(width: 16),
+          SizedBox(width: AppSizeW.s16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(bottom: 4),
+                  margin: EdgeInsets.only(bottom: AppSizeH.s4),
                   child: Text(
                     title ?? "Success",
                     style: TextStyle(
@@ -85,9 +86,9 @@ class CustomToast {
         ],
       ),
       backgroundColor: AppVar.success,
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      margin: EdgeInsets.symmetric(horizontal: 16),
-      borderRadius: 8,
+      padding: EdgeInsets.symmetric(horizontal: AppSizeW.s16, vertical: AppSizeH.s10),
+      margin: EdgeInsets.symmetric(horizontal: AppSizeW.s16),
+      borderRadius: AppSizeR.s8,
       snackPosition: SnackPosition.TOP,
     );
   }

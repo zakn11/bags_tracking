@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tracking_system_app/modules/home/controller/home_controller.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class CustomersListWidget extends StatelessWidget {
   const CustomersListWidget({
@@ -13,8 +14,8 @@ class CustomersListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTaplet = MediaQuery.of(context).size.width > 800 &&
-        MediaQuery.of(context).size.height > 800;
+    // final isTaplet = MediaQuery.of(context).size.width > 800 &&
+    //     MediaQuery.of(context).size.height > 800;
     return Obx(() {
       if (controller.customersList.isEmpty) {
         return Center(
@@ -26,20 +27,19 @@ class CustomersListWidget extends StatelessWidget {
             children: [
               AnimatedContainer(
                 duration: const Duration(milliseconds: 100),
-                width: 100,
-                height: 100,
+                width: AppSizeW.s100,
+                height: AppSizeH.s100,
                 child: Image.asset(
                   color: AppVar.primary,
                   "assets/images/customer.png",
-                  // "assets/images/documents_icon.png",
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: AppSizeH.s20),
               Text(
                 "There is no customers for you",
                 style: TextStyle(
-                  fontSize: isTaplet ? 36 : 16,
+                  fontSize: AppSizeSp.s16,
                   fontFamily: "ABeeZee",
                   color: AppVar.primary,
                   decoration: TextDecoration.none,
@@ -50,22 +50,22 @@ class CustomersListWidget extends StatelessWidget {
         ));
       }
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
+        padding: EdgeInsets.symmetric(horizontal: AppSizeW.s20, vertical: AppSizeH.s30),
         child: Column(
           children: [
             Text(
               "My Costomers",
               style: TextStyle(
-                fontSize: 30,
+                fontSize: AppSizeSp.s30,
                 color: AppVar.primary,
                 decoration: TextDecoration.none,
               ),
             ),
             Divider(
               color: AppVar.secondary,
-              thickness: 2,
-              endIndent: 20,
-              indent: 20,
+              thickness: AppSizeW.s2,
+              endIndent: AppSizeW.s20,
+              indent: AppSizeW.s20,
             ),
             ListView.builder(
               shrinkWrap: true,
@@ -74,27 +74,64 @@ class CustomersListWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 final item = controller.customersList[index];
                 return GestureDetector(
-                  // onTap: () => controller.selectItem(item),
                   child: Container(
                     width: double.infinity,
-                    margin: const EdgeInsets.only(top: 5),
+                    margin: EdgeInsets.only(top: AppSizeH.s5),
                     padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                        EdgeInsets.symmetric(vertical: AppSizeH.s8, horizontal: AppSizeW.s12),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7),
+                      borderRadius: BorderRadius.circular(AppSizeR.s7),
                       border: Border.all(color: Colors.grey),
-                      // color: controller.selectedDocumentType.value == item
-                      //     ? const Color(0xffC0D5FA)
-                      //     :
                       color: Colors.white,
                     ),
-                    child: Text(
-                      "${item.name} / Bags Id: ${item.bags}",
-                      style: TextStyle(
-                        fontSize: isTaplet ? 24 : 13,
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                        decoration: TextDecoration.none,
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              item.name,
+                              style: TextStyle(
+                                fontSize: AppSizeSp.s13,
+                                color: const Color.fromARGB(255, 0, 0, 0),
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                            Text(
+                              "Bags Ids: ${item.bags}",
+                              style: TextStyle(
+                                fontSize: AppSizeSp.s13,
+                                color: const Color.fromARGB(255, 0, 0, 0),
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: AppSizeH.s20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Address:${item.address}",
+                              style: TextStyle(
+                                fontSize:  AppSizeSp.s13,
+                                color: const Color.fromARGB(255, 0, 0, 0),
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                            Text(
+                              item.phone ?? "",
+                              style: TextStyle(
+                                fontSize:AppSizeSp.s13,
+                                fontWeight: FontWeight.bold,
+                                color: AppVar.primary,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 );

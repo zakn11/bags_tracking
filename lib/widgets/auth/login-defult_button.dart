@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class LoginDefultButton extends StatelessWidget {
   const LoginDefultButton({
@@ -23,8 +24,6 @@ class LoginDefultButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      //Go to LOGIN PAGE
-
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         elevation: 5,
@@ -32,9 +31,9 @@ class LoginDefultButton extends StatelessWidget {
         shadowColor: AppVar.textColor,
         shape: RoundedRectangleBorder(
             borderRadius:
-                BorderRadius.circular(AppVar.borderradiusprimary + 10),
-            side: BorderSide(color: borderColor, width: 2)),
-        fixedSize: Size(MediaQuery.of(context).size.width * 0.9, 30.0),
+                BorderRadius.circular(AppVar.borderradiusprimary + AppSizeR.s10),
+            side: BorderSide(color: borderColor, width: AppSizeW.s2)),
+        fixedSize: Size(MediaQuery.of(context).size.width * 0.9, AppSizeH.s30),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tracking_system_app/modules/qr_scan/controller/qr_scan_controller.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 
 class StatusTypesRowWidget extends StatelessWidget {
   const StatusTypesRowWidget({
@@ -18,11 +19,11 @@ class StatusTypesRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(AppSizeR.s15),
         color: Colors.white,
         border: Border.all(
           color: AppVar.textColor,
-          width: 2,
+          width: AppSizeW.s2,
         ),
       ),
       child: Obx(
@@ -30,13 +31,13 @@ class StatusTypesRowWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 10, horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  vertical: AppSizeH.s10, horizontal: AppSizeW.s20),
               decoration: BoxDecoration(
                 borderRadius:
                     qrController.scanningKind.value ==
                             "check_in"
-                        ? BorderRadius.circular(13)
+                        ? BorderRadius.circular(AppSizeR.s13)
                         : null,
                 color:
                     qrController.scanningKind.value ==
@@ -53,13 +54,13 @@ class StatusTypesRowWidget extends StatelessWidget {
                           ? Colors.white
                           : Colors.grey,
                   fontWeight: FontWeight.bold,
-                  fontSize: isTaplet ? 20 : 12,
+                  fontSize: isTaplet ? AppSizeSp.s20 : AppSizeSp.s12,
                 ),
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 10, horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  vertical: AppSizeH.s10, horizontal: AppSizeW.s20),
               decoration: BoxDecoration(
                 border: qrController
                                 .scanningKind.value !=
@@ -67,9 +68,9 @@ class StatusTypesRowWidget extends StatelessWidget {
                         qrController
                                 .scanningKind.value ==
                             "check_out"
-                    ? const Border(
+                    ? Border(
                         left: BorderSide(
-                          width: 1,
+                          width: AppSizeW.s1,
                         ),
                       )
                     : qrController.scanningKind.value !=
@@ -77,29 +78,29 @@ class StatusTypesRowWidget extends StatelessWidget {
                             qrController.scanningKind
                                     .value ==
                                 "check_in"
-                        ? const Border(
+                        ? Border(
                             right: BorderSide(
-                              width: 1,
+                              width: AppSizeW.s1,
                             ),
                           )
                         : null,
                 borderRadius: qrController
                             .scanningKind.value ==
                         "delivered"
-                    ? BorderRadius.circular(15)
+                    ? BorderRadius.circular(AppSizeR.s15)
                     : qrController.scanningKind.value ==
                             "check_in"
-                        ? const BorderRadius.only(
+                        ? BorderRadius.only(
                             topRight:
-                                Radius.circular(15),
+                                Radius.circular(AppSizeR.s15),
                             bottomRight:
-                                Radius.circular(15),
+                                Radius.circular(AppSizeR.s15),
                           )
-                        : const BorderRadius.only(
+                        : BorderRadius.only(
                             topLeft:
-                                Radius.circular(15),
+                                Radius.circular(AppSizeR.s15),
                             bottomLeft:
-                                Radius.circular(15),
+                                Radius.circular(AppSizeR.s15),
                           ),
                 color:
                     qrController.scanningKind.value ==
@@ -116,18 +117,18 @@ class StatusTypesRowWidget extends StatelessWidget {
                           ? Colors.white
                           : Colors.grey,
                   fontWeight: FontWeight.bold,
-                  fontSize: isTaplet ? 20 : 12,
+                  fontSize: isTaplet ? AppSizeSp.s20 : AppSizeSp.s12,
                 ),
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 10, horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  vertical: AppSizeH.s10, horizontal: AppSizeW.s20),
               decoration: BoxDecoration(
                 borderRadius:
                     qrController.scanningKind.value ==
                             "check_out"
-                        ? BorderRadius.circular(13)
+                        ? BorderRadius.circular(AppSizeR.s13)
                         : null,
                 color:
                     qrController.scanningKind.value ==
@@ -144,7 +145,7 @@ class StatusTypesRowWidget extends StatelessWidget {
                           ? Colors.white
                           : Colors.grey,
                   fontWeight: FontWeight.bold,
-                  fontSize: isTaplet ? 20 : 12,
+                  fontSize: isTaplet ? AppSizeSp.s20 : AppSizeSp.s12,
                 ),
               ),
             ),

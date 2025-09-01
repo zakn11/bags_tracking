@@ -17,6 +17,7 @@ class AppVar {
   static Color error = Color(0xFFD00E0E);
   static Color success = Color(0xFF16AE26);
   static Color warning = Color(0xFFEB8600);
+  static Color buttonColor = Color(0xff1CB26B);
   static String LANG_CODE = 'en';
   static Map<String, String> trArr = {};
   static const VERSION_NUMBER = 60002000;

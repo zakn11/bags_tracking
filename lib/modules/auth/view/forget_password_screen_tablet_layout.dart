@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tracking_system_app/modules/auth/controller/forget_password_controller.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 import 'package:tracking_system_app/widgets/auth/costume_login_TextField_widget.dart';
 import 'package:tracking_system_app/widgets/auth/login-defult_button.dart';
 
@@ -27,58 +28,27 @@ class ForgetPasswordScreenTapletLayout
             builder: (context, orientation) {
               final screenWidth = MediaQuery.sizeOf(context).width;
               final screenHeight = MediaQuery.sizeOf(context).height;
-              final isTablet =
-                  screenWidth > 600;
+              final isTablet = screenWidth > 600;
               final isLandscape =
                   MediaQuery.of(context).orientation == Orientation.landscape;
-              // if (orientation == Orientation.landscape) {
-              //   return const Text("landing");
-              // } else {
               return Stack(
                 children: [
                   if (!isLandscape)
                     Positioned(
                       bottom: 0,
                       child: Image(
-                        width:
-                            //for DONE message
-                            controller.isWaitAdminApproved.value
-                                ? 0
-                                : screenWidth,
+                        width: controller.isWaitAdminApproved.value
+                            ? 0
+                            : screenWidth,
                         image: const AssetImage('assets/images/Rectingle.jpg'),
-                        fit:
-                            // avarige >= 895 ||
-                            //         avarige == 630 && !isLandscape
-                            //     ? BoxFit.fill
-                            //     :
-                            BoxFit.cover,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  // waiting for admin approval 
                   Obx(() {
-                    // if (controller.isLoading.value) {
-                    //   if (Get.isDialogOpen!) {
-                    //     Get.back(); 
-                    //   }
-                    //   Get.dialog(
-                    //     const Center(
-                    //       child: MainLoadingWidget(),
-                    //     ),
-                    //     barrierDismissible:
-                    //         false, 
-                    //   );
-                    // }
-
                     if (controller.isWaitAdminApproved.value) {
-                      return
-                          //  Positioned(
-                          //   bottom: MediaQuery.sizeOf(context).height * 0.15,
-                          //   right: 0,
-                          //   left: 0,
-                          // child:
-                          Column(
+                      return Column(
                         children: [
-                          const SizedBox(height: 20),
+                          SizedBox(height: AppSizeH.s20),
                           Center(
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(1000),
@@ -87,9 +57,10 @@ class ForgetPasswordScreenTapletLayout
                                     borderRadius: BorderRadius.circular(1000),
                                     color: AppVar.background,
                                     border: Border.all(
-                                        width: 3, color: AppVar.primary)),
-                                width: 150,
-                                height: 150,
+                                        width: AppSizeW.s3,
+                                        color: AppVar.primary)),
+                                width: AppSizeW.s150,
+                                height: AppSizeH.s150,
                                 child: Image.asset(
                                   "assets/images/Logo1.png",
                                   fit: BoxFit.fill,
@@ -100,43 +71,44 @@ class ForgetPasswordScreenTapletLayout
                           Center(
                             child: LottieBuilder.asset(
                               "assets/Lottie/Animation - 1726871315481.json",
-                              width: 200,
-                              height: 200,
+                              width: AppSizeW.s200,
+                              height: AppSizeH.s200,
                               repeat: false,
                               fit: BoxFit.fill,
                             ),
                           ),
-                          const SizedBox(height: 20),
-                          const Text(
+                          SizedBox(height: AppSizeH.s20),
+                          Text(
                             "Done!",
                             style: TextStyle(
-                              color: Color(0xff1CB26B),
-                              fontSize: 30,
+                              color: AppVar.buttonColor,
+                              fontSize: AppSizeSp.s30,
                             ),
                             textAlign: TextAlign.center,
                           ),
                           Container(
-                            margin: const EdgeInsets.symmetric(vertical: 20),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 15),
+                            margin:
+                                EdgeInsets.symmetric(vertical: AppSizeH.s20),
+                            padding: EdgeInsets.symmetric(
+                                vertical: AppSizeH.s5,
+                                horizontal: AppSizeW.s15),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                width: 1,
-                                color: const Color(0xff1CB26B),
+                                width: AppSizeW.s1,
+                                color: AppVar.buttonColor,
                               ),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(AppSizeR.s10),
                             ),
-                            child: const Text(
+                            child: Text(
                               "Waiting for admin approval",
                               style: TextStyle(
                                 color: AppVar.seconndTextColor,
-                                fontSize: 16,
+                                fontSize: AppSizeSp.s16,
                               ),
                               textAlign: TextAlign.center,
                             ),
                           ),
                         ],
-                        // ),
                       );
                     } else {
                       return Container();
@@ -146,17 +118,12 @@ class ForgetPasswordScreenTapletLayout
                     child: SingleChildScrollView(
                       child: Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 40,
-                            // isTablet ? 80.0 : 40.0,
+                            horizontal: AppSizeW.s40,
                             vertical: screenWidth <= 400 && screenHeight < 700
                                 ? 0
                                 : isLandscape
-                                    ? 80
-                                    : screenWidth * 0.2
-                            // isLandscape
-                            //     ? 20 : 30
-                            //     : 40.0,
-                            ),
+                                    ? AppSizeH.s80
+                                    : screenWidth * 0.2),
                         child: Obx(
                           () => Opacity(
                             opacity:
@@ -164,13 +131,8 @@ class ForgetPasswordScreenTapletLayout
                             child: Form(
                               key: controller.formKey,
                               child: Column(
-                                // mainAxisAlignment: isLandscape
-                                //     ? MainAxisAlignment.start
-                                //     : MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                // mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  // const SizedBox(height: 20),
                                   Center(
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(1000),
@@ -180,7 +142,7 @@ class ForgetPasswordScreenTapletLayout
                                                 BorderRadius.circular(1000),
                                             color: AppVar.background,
                                             border: Border.all(
-                                                width: 3,
+                                                width: AppSizeW.s3,
                                                 color: AppVar.primary)),
                                         width: screenWidth * 0.2,
                                         height: screenWidth * 0.2,
@@ -191,27 +153,22 @@ class ForgetPasswordScreenTapletLayout
                                       ),
                                     ),
                                   ),
-                                  // SizedBox(
-                                  //     height: screenHeight > 800 &&
-                                  //             screenWidth < 400
-                                  //         ? screenWidth * 0.4
-                                  //         : screenWidth * 0.19),
-
-                                  const SizedBox(height: 50),
+                                  SizedBox(height: AppSizeH.s50),
                                   Stack(
                                     alignment: Alignment.center,
                                     children: [
                                       Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            vertical: 40),
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 20, horizontal: 20),
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: AppSizeH.s40),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: AppSizeH.s20,
+                                            horizontal: AppSizeW.s20),
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                              width: 3,
+                                              width: AppSizeW.s3,
                                               color: AppVar.background),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
+                                          borderRadius: BorderRadius.circular(
+                                              AppSizeR.s20),
                                         ),
                                         child: Column(
                                           children: [
@@ -222,21 +179,10 @@ class ForgetPasswordScreenTapletLayout
                                               inputType: TextInputType.text,
                                               hintText: 'Full Name',
                                               title: 'Full Name',
-                                              controller:
-                                                  controller.fullNameController,
+                                              controller: controller
+                                                  .firstNameController,
                                               validator: null,
                                             ),
-                                            // CustomeLoginTextFormField(
-                                            //   isFilledTextFild: false,
-                                            //   filledTextFildData: "",
-                                            //   prefixIcon: null,
-                                            //   inputType: TextInputType.text,
-                                            //   hintText: 'Phone Number',
-                                            //   title: 'Employee ID',
-                                            //   controller: controller
-                                            //       .phoneNumberController,
-                                            //   validator: null,
-                                            // ),
                                             CustomeLoginTextFormField(
                                               isFilledTextFild: false,
                                               filledTextFildData: "",
@@ -244,36 +190,37 @@ class ForgetPasswordScreenTapletLayout
                                               inputType: TextInputType.number,
                                               title: 'Phone Number',
                                               prefixIcon: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: AppSizeW.s8),
                                                 child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   children: [
                                                     Image.asset(
                                                       'assets/images/uae_flag.png',
-                                                      width: 24,
-                                                      height: 24,
+                                                      width: AppSizeW.s24,
+                                                      height: AppSizeH.s24,
                                                     ),
-                                                    const SizedBox(width: 5),
+                                                    SizedBox(
+                                                        width: AppSizeW.s5),
                                                     Container(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 5),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                              border: Border(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal:
+                                                                  AppSizeW.s5),
+                                                      decoration: BoxDecoration(
+                                                          border: Border(
                                                         right: BorderSide(
                                                           color: AppVar
                                                               .seconndTextColor,
-                                                          width: 1.0,
+                                                          width: AppSizeW.s1,
                                                         ),
                                                       )),
-                                                      child: const Text(
+                                                      child: Text(
                                                         '+971',
                                                         style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize:
+                                                              AppSizeSp.s14,
                                                           color: AppVar
                                                               .seconndTextColor,
                                                           fontWeight:
@@ -310,10 +257,9 @@ class ForgetPasswordScreenTapletLayout
                                               isFilledTextFild: false,
                                               filledTextFildData: "",
                                             ),
-                                            const SizedBox(
-                                              height: 30,
+                                            SizedBox(
+                                              height: AppSizeH.s30,
                                             ),
-                                            //4
                                             Center(
                                               child: SizedBox(
                                                 width: screenWidth *
@@ -324,7 +270,7 @@ class ForgetPasswordScreenTapletLayout
                                                           ? 0.017
                                                           : 0.021),
                                                   buttonColor:
-                                                      const Color(0xff1CB26B),
+                                                      AppVar.buttonColor,
                                                   borderColor:
                                                       Colors.transparent,
                                                   textColor:
@@ -334,7 +280,6 @@ class ForgetPasswordScreenTapletLayout
                                                     if (controller
                                                         .formKey.currentState!
                                                         .validate()) {
-                   
                                                       controller.validateForm();
                                                     }
                                                   },
@@ -344,18 +289,19 @@ class ForgetPasswordScreenTapletLayout
                                           ],
                                         ),
                                       ),
-                                      //2======================
                                       Positioned(
-                                        top: 25,
+                                        top: AppSizeH.s25,
                                         child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 5, horizontal: 15),
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: AppSizeH.s5,
+                                                horizontal: AppSizeW.s15),
                                             decoration: BoxDecoration(
                                               border: Border.all(
-                                                  width: 3,
+                                                  width: AppSizeW.s3,
                                                   color: AppVar.background),
                                               borderRadius:
-                                                  BorderRadius.circular(20),
+                                                  BorderRadius.circular(
+                                                      AppSizeR.s20),
                                               color: AppVar.primary,
                                             ),
                                             child: Text(
@@ -382,8 +328,8 @@ class ForgetPasswordScreenTapletLayout
                     ),
                   ),
                   Positioned(
-                    top: 10,
-                    left: 10,
+                    top: AppSizeH.s10,
+                    left: AppSizeW.s10,
                     child: IconButton(
                       icon: Icon(Icons.arrow_back_ios_new,
                           color: MediaQuery.of(context).orientation ==

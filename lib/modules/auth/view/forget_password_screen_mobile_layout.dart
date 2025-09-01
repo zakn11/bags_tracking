@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tracking_system_app/modules/auth/controller/forget_password_controller.dart';
 import 'package:tracking_system_app/style/app_var.dart';
+import 'package:tracking_system_app/style/values_manager.dart';
 import 'package:tracking_system_app/widgets/auth/costume_login_TextField_widget.dart';
 import 'package:tracking_system_app/widgets/auth/login-defult_button.dart';
 
@@ -14,368 +15,302 @@ class ForgetPasswordScreenMobileLayout
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Obx(
-        () => Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new,
-                  color: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ? AppVar.background
-                      : AppVar.primary),
-              onPressed: () {
-                Get.back();
-              },
-            ),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new, color: AppVar.background),
+            onPressed: () {
+              Get.back();
+            },
           ),
-          backgroundColor:
-              MediaQuery.of(context).orientation == Orientation.landscape &&
-                      !controller.isWaitAdminApproved.value
-                  ? AppVar.primary
-                  : controller.isWaitAdminApproved.value
-                      ? AppVar.primary
-                      : AppVar.background,
-          body: OrientationBuilder(builder: (context, orientation) {
-            final screenWidth = MediaQuery.sizeOf(context).width;
-            final screenHeight = MediaQuery.sizeOf(context).height;
-            final isLandscape =
-                MediaQuery.of(context).orientation == Orientation.landscape;
-            // if (orientation == Orientation.landscape) {
-            //   return const Text("landing");
-            // } else {
-            return Stack(
-              children: [
-                if (!isLandscape)
-                  Positioned(
-                    bottom: 0,
-                    child: Image(
-                      width:
-                          controller.isWaitAdminApproved.value
-                              ? 0
-                              : screenWidth <= 400 && screenHeight < 700
-                                  ? screenWidth
-                                  : screenWidth + 70,
-                      image: const AssetImage('assets/images/Rectingle.jpg'),
-                      fit:
-                          // avarige >= 895 ||
-                          //         avarige == 630 && !isLandscape
-                          //     ? BoxFit.fill
-                          //     :
-                          BoxFit.cover,
-                    ),
-                  ),
-                // waiting for admin approval 
-                SingleChildScrollView(
-                  child: Obx(() {
-                    if (controller.isWaitAdminApproved.value) {
-                      return
-                          // Positioned(
-                          //   // bottom: MediaQuery.sizeOf(context).height * 0.15,
-                          //   right: 0,
-                          //   left: 0,
-                          // child:
-                          Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          if (!isLandscape) const SizedBox(height: 20),
-                          if (!isLandscape)
-                            Center(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(1000),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(1000),
-                                      color: AppVar.background,
-                                      border: Border.all(
-                                          width: 3, color: AppVar.primary)),
-                                  width: 150,
-                                  height: 150,
-                                  child: Image.asset(
-                                    "assets/images/Logo1.png",
-                                    fit: BoxFit.fill,
-                                  ),
+        ),
+        backgroundColor: AppVar.primary,
+        body: OrientationBuilder(builder: (context, orientation) {
+          final screenWidth = MediaQuery.sizeOf(context).width;
+          final screenHeight = MediaQuery.sizeOf(context).height;
+          final isLandscape =
+              MediaQuery.of(context).orientation == Orientation.landscape;
+          return Stack(
+            children: [
+              SingleChildScrollView(
+                child: Obx(() {
+                  if (controller.isWaitAdminApproved.value) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        if (!isLandscape)
+                          Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(1000),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1000),
+                                    color: AppVar.background,
+                                    border: Border.all(
+                                        width: AppSizeW.s3,
+                                        color: AppVar.primary)),
+                                width: 150,
+                                height: 150,
+                                child: Image.asset(
+                                  "assets/images/Logo1.png",
+                                  fit: BoxFit.fill,
                                 ),
                               ),
                             ),
-                          Center(
-                            child: LottieBuilder.asset(
-                              "assets/Lottie/Animation - 1726871315481.json",
-                              width: 200,
-                              height: 200,
-                              repeat: false,
-                              fit: BoxFit.fill,
-                            ),
                           ),
-                          if (!isLandscape) const SizedBox(height: 20),
-                          const Text(
-                            "Done!",
+                        Center(
+                          child: LottieBuilder.asset(
+                            "assets/Lottie/Animation - 1726871315481.json",
+                            width: AppSizeW.s200,
+                            height: AppSizeH.s200,
+                            repeat: false,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        if (!isLandscape) SizedBox(height: AppSizeH.s20),
+                        Text(
+                          "Done!",
+                          style: TextStyle(
+                            color: AppVar.buttonColor,
+                            fontSize: AppSizeSp.s30,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: AppSizeH.s20),
+                          padding: EdgeInsets.symmetric(
+                              vertical: AppSizeH.s5, horizontal: AppSizeW.s15),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: AppSizeW.s1,
+                              color: AppVar.buttonColor,
+                            ),
+                            borderRadius: BorderRadius.circular(AppSizeR.s10),
+                          ),
+                          child: Text(
+                            "Waiting for admin approval",
                             style: TextStyle(
-                              color: Color(0xff1CB26B),
-                              fontSize: 30,
+                              color: AppVar.seconndTextColor,
+                              fontSize: AppSizeSp.s16,
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 20),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 15),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 1,
-                                color: const Color(0xff1CB26B),
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Text(
-                              "Waiting for admin approval",
-                              style: TextStyle(
-                                color: AppVar.seconndTextColor,
-                                fontSize: 16,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                        // ),
-                      );
-                    } else {
-                      return Container();
-                    }
-                  }),
-                ),
-                Positioned(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 40,
-                          // isTablet ? 80.0 : 40.0,
-                          vertical: isLandscape
-                              ? 20
-                              : screenWidth <= 400 && screenHeight < 700
-                                  ? 0
-                                  : screenWidth * 0.3
-                          // isLandscape
-                          //     ? 20 : 30
-                          //     : 40.0, 
-                          ),
-                      child: Obx(
-                        () => Opacity(
-                          opacity: controller.isWaitAdminApproved.value ? 0 : 1,
-                          child: Form(
-                            key: controller.formKey,
-                            child: Column(
-                              // mainAxisAlignment: isLandscape
-                              //     ? MainAxisAlignment.start
-                              //     : MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const SizedBox(height: 20),
-                                Center(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(1000),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(1000),
-                                          color: AppVar.background,
-                                          border: Border.all(
-                                              width: 3, color: AppVar.primary)),
-                                      width: 150,
-                                      height: 150,
-                                      child: Image.asset(
-                                        "assets/images/Logo1.png",
-                                        fit: BoxFit.fill,
-                                      ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Container();
+                  }
+                }),
+              ),
+              Positioned(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppSizeW.s40,
+                    ),
+                    child: Obx(
+                      () => Opacity(
+                        opacity: controller.isWaitAdminApproved.value ? 0 : 1,
+                        child: Form(
+                          key: controller.formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(height: AppSizeH.s20),
+                              Center(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(1000),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(1000),
+                                        color: AppVar.background,
+                                        border: Border.all(
+                                            width: AppSizeW.s3,
+                                            color: AppVar.primary)),
+                                    width: 150,
+                                    height: 150,
+                                    child: Image.asset(
+                                      "assets/images/Logo1.png",
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                    height: isLandscape
-                                        ? 0
-                                        : screenHeight > 800 &&
-                                                screenWidth < 400
-                                            ? screenWidth * 0.4
-                                            : screenWidth *
-                                                0.19),
-
-                                const SizedBox(height: 30),
-                                Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 40),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 20),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: 1, color: AppVar.background),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          CustomeLoginTextFormField(
-                                            isFilledTextFild: false,
-                                            filledTextFildData: "",
-                                            prefixIcon: null,
-                                            inputType: TextInputType.text,
-                                            hintText: 'Full Name',
-                                            title: 'Full Name',
-                                            controller:
-                                                controller.fullNameController,
-                                            validator: null,
-                                          ),
-                                          // CustomeLoginTextFormField(
-                                          //   isFilledTextFild: false,
-                                          //   filledTextFildData: "",
-                                          //   prefixIcon: null,
-                                          //   inputType: TextInputType.text,
-                                          //   hintText: 'Phone Number',
-                                          //   title: 'Phone Number',
-                                          //   controller: controller
-                                          //       .phoneNumberController,
-                                          //   validator: null,
-                                          // ),
-                                          CustomeLoginTextFormField(
-                                            isFilledTextFild: false,
-                                            filledTextFildData: "",
-                                            hintText: 'Phone Number',
-                                            inputType: TextInputType.number,
-                                            title: 'Phone Number',
-                                            prefixIcon: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 8.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Image.asset(
-                                                    'assets/images/uae_flag.png',
-                                                    width: 24,
-                                                    height: 24,
-                                                  ),
-                                                  const SizedBox(width: 5),
-                                                  Container(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 5),
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                            border: Border(
-                                                      right: BorderSide(
-                                                        color: AppVar
-                                                            .seconndTextColor,
-                                                        width: 1.0,
-                                                      ),
-                                                    )),
-                                                    child: const Text(
-                                                      '+971',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: AppVar
-                                                            .seconndTextColor,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                              ),
+                              SizedBox(height: AppSizeH.s30),
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: AppSizeH.s40),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: AppSizeH.s20,
+                                        horizontal: AppSizeW.s20),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: AppSizeW.s1,
+                                          color: AppVar.background),
+                                      borderRadius:
+                                          BorderRadius.circular(AppSizeR.s20),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        CustomeLoginTextFormField(
+                                          isFilledTextFild: false,
+                                          filledTextFildData: "",
+                                          prefixIcon: null,
+                                          inputType: TextInputType.text,
+                                          hintText: 'First Name',
+                                          title: 'First Name',
+                                          controller:
+                                              controller.firstNameController,
+                                          validator: null,
+                                        ),
+                                        CustomeLoginTextFormField(
+                                          isFilledTextFild: false,
+                                          filledTextFildData: "",
+                                          prefixIcon: null,
+                                          inputType: TextInputType.text,
+                                          hintText: 'Last Name',
+                                          title: 'Last Name',
+                                          controller:
+                                              controller.lastNameController,
+                                          validator: null,
+                                        ),
+                                        CustomeLoginTextFormField(
+                                          isFilledTextFild: false,
+                                          filledTextFildData: "",
+                                          hintText: 'Phone Number',
+                                          inputType: TextInputType.number,
+                                          title: 'Phone Number',
+                                          prefixIcon: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: AppSizeW.s8),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Image.asset(
+                                                  'assets/images/uae_flag.png',
+                                                  width: AppSizeW.s24,
+                                                  height: AppSizeH.s24,
+                                                ),
+                                                SizedBox(width: AppSizeW.s5),
+                                                Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: AppSizeW.s5),
+                                                  decoration: BoxDecoration(
+                                                      border: Border(
+                                                    right: BorderSide(
+                                                      color: AppVar
+                                                          .seconndTextColor,
+                                                      width: AppSizeW.s1,
+                                                    ),
+                                                  )),
+                                                  child: Text(
+                                                    '+971',
+                                                    style: TextStyle(
+                                                      fontSize: AppSizeSp.s14,
+                                                      color: AppVar
+                                                          .seconndTextColor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
-                                                ],
-                                              ),
-                                            ),
-                                            controller: controller
-                                                .phoneNumberController,
-                                            validator: null,
-                                          ),
-                                          CustomeLoginTextFormField(
-                                            prefixIcon: null,
-                                            inputType: TextInputType.text,
-                                            hintText: 'New Password',
-                                            title: 'Password',
-                                            controller:
-                                                controller.passwordController,
-                                            validator: null,
-                                            isFilledTextFild: false,
-                                            filledTextFildData: "",
-                                          ),
-                                          CustomeLoginTextFormField(
-                                            prefixIcon: null,
-                                            inputType: TextInputType.text,
-                                            hintText: 'Confirm New Password',
-                                            title: 'Password',
-                                            controller: controller
-                                                .confirmPasswordController,
-                                            validator: null,
-                                            isFilledTextFild: false,
-                                            filledTextFildData: "",
-                                          ),
-                                          const SizedBox(
-                                            height: 30,
-                                          ),
-                                          //4
-                                          Center(
-                                            child: SizedBox(
-                                              width: 150,
-                                              child: LoginDefultButton(
-                                                fontsize: AppVar.littelFontSize,
-                                                buttonColor:
-                                                    const Color(0xff1CB26B),
-                                                borderColor: Colors.transparent,
-                                                textColor:
-                                                    AppVar.seconndTextColor,
-                                                title: "Send to admin",
-                                                onPressed: () {
-                                                  if (controller
-                                                      .formKey.currentState!
-                                                      .validate()) {
-                                                    controller.validateForm();
-                                                  }
-                                                },
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                          controller:
+                                              controller.phoneNumberController,
+                                          validator: null,
+                                        ),
+                                        CustomeLoginTextFormField(
+                                          prefixIcon: null,
+                                          inputType: TextInputType.text,
+                                          hintText: 'New Password',
+                                          title: 'Password',
+                                          controller:
+                                              controller.passwordController,
+                                          validator: null,
+                                          isFilledTextFild: false,
+                                          filledTextFildData: "",
+                                        ),
+                                        CustomeLoginTextFormField(
+                                          prefixIcon: null,
+                                          inputType: TextInputType.text,
+                                          hintText: 'Confirm New Password',
+                                          title: 'Password',
+                                          controller: controller
+                                              .confirmPasswordController,
+                                          validator: null,
+                                          isFilledTextFild: false,
+                                          filledTextFildData: "",
+                                        ),
+                                        SizedBox(
+                                          height: AppSizeH.s30,
+                                        ),
+                                        Center(
+                                          child: SizedBox(
+                                            width: AppSizeW.s150,
+                                            child: LoginDefultButton(
+                                              fontsize: AppVar.littelFontSize,
+                                              buttonColor: AppVar.buttonColor,
+                                              borderColor: Colors.transparent,
+                                              textColor:
+                                                  AppVar.seconndTextColor,
+                                              title: "Send to admin",
+                                              onPressed: () {
+                                                if (controller
+                                                    .formKey.currentState!
+                                                    .validate()) {
+                                                  controller.validateForm();
+                                                }
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    //2======================
-                                    Positioned(
-                                      top: 25,
-                                      child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5, horizontal: 15),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1,
-                                                color: AppVar.background),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color: AppVar.primary,
+                                  ),
+                                  Positioned(
+                                    top: AppSizeH.s25,
+                                    child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: AppSizeH.s5,
+                                            horizontal: AppSizeW.s15),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              width: AppSizeW.s1,
+                                              color: AppVar.background),
+                                          borderRadius: BorderRadius.circular(
+                                              AppSizeR.s20),
+                                          color: AppVar.primary,
+                                        ),
+                                        child: const Text(
+                                          "Forget Password",
+                                          style: TextStyle(
+                                            color: AppVar.seconndTextColor,
                                           ),
-                                          child: const Text(
-                                            "Forget Password",
-                                            style: TextStyle(
-                                              color: AppVar.seconndTextColor,
-                                            ),
-                                          )),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              
-              ],
-            );
-          }
               ),
-        ),
+            ],
+          );
+        }),
       ),
     );
   }
