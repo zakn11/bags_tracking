@@ -23,7 +23,7 @@ class HomeController extends GetxController {
           image: null,
           role: "")
       .obs;
-  //==============Zak's Editation=======================
+
   RxBool isCostumersIconPressed = false.obs;
   RxBool isDropdownOpen = false.obs;
   RxList<CustomerListDataModel> filteredCustomers =
@@ -57,7 +57,7 @@ class HomeController extends GetxController {
   Future<void> sendToAdmin() async {
     isLoading.value = true;
     try {
-      // //zak uncomment this lines
+
       final response = await $.post('message/sendMessage', body: {
         "data": issueDialogController.text,
       });
@@ -143,7 +143,7 @@ class HomeController extends GetxController {
   RxList<CustomerListDataModel> customersList = <CustomerListDataModel>[].obs;
   Future initializeCustomersTypes() async {
     isCustomersLoading.value = true;
-//zak uncomment this lines
+
     var data = await $.get('/getCustomerForDriver/${myInfoModel.value.id}');
     if (data != null) {
       customersList.value = (data['data'] as List)
